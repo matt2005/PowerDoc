@@ -197,7 +197,10 @@ function Get-DeviceScanObject {
 		,
 		[Parameter(Mandatory=$false)]
 		[Boolean]
-		$IsWmiAlive = $false
+		$IsWmiAlive = $false,
+		[Parameter(Mandatory=$false)]
+		[Boolean]
+		$IsWinRMAlive = $false
 	)
 	process {
 		Write-Output (
@@ -207,6 +210,7 @@ function Get-DeviceScanObject {
 				IPAddress = $IPAddress
 				IsPingAlive = $IsPingAlive
 				IsWmiAlive = $IsWmiAlive 
+				IsWinRMAlive = $IsWinRMAlive 
 			}
 		)
 	}
@@ -446,6 +450,7 @@ function Find-IPv4Device {
 
 		$PingProgressId = Get-Random
 		$WmiProgressId = Get-Random
+    $WinRMProgressId= Get-Random
 
 		# For use with runspaces
 		$ScriptBlock = $null
@@ -621,7 +626,7 @@ function Find-IPv4Device {
 
 						if ($HasMetCriteria -eq $true) {
 							if (-not ($Device.Values | Where-Object { ($_.DnsRecordName -ieq $HostName) -and ($_.IPAddress -ieq $IPAddress) })) {
-								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false))
+								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false))
 							} 
 						}
 					}
@@ -681,7 +686,7 @@ function Find-IPv4Device {
 							#if (-not ($Device.Values | Where-Object { ($_.IPAddress -ieq $IPAddress) })) {
 
 							if ($HasMetCriteria -eq $true) {
-								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $null -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false)) 
+								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $null -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
 							}
 							#}
 						}
@@ -705,7 +710,7 @@ function Find-IPv4Device {
 
 							$_.AddressList | Where-Object { $_.AddressFamily -ieq 'InterNetwork' } | ForEach-Object {
 								if ((($PrivateOnly -eq $true) -and ((Test-PrivateIPAddress -IPAddress $_.IPAddressToString) -eq $true)) -or ($PrivateOnly -eq $false)) {
-									$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $_.IPAddressToString -IsPingAlive $false -IsWmiAlive $false)) 
+									$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $_.IPAddressToString -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
 								}
 							}
 						}
@@ -1023,7 +1028,108 @@ function Find-IPv4Device {
 			}
 
 		} while (($Runspaces | Where-Object {$_.Runspace -ne $Null} | Measure-Object).Count -gt 0)
+		Write-NetworkScanLog -Message "Testing WinRM connectivity to $DeviceCount addresses" -MessageLevel Information
+		Write-Progress -Activity 'Testing WinRM connectivity' -PercentComplete 0 -Status "Testing $DeviceCount Addresses" -Id $WinRMProgressId -ParentId $ParentProgressId
+<# WINRM CONNECTIVITY TEST #>
+		#region
 
+		$ScanCount = 0
+		$ScriptBlock = {
+			Param (
+				[String]$ComputerName
+			)
+			Test-Connection -ComputerName $ComputerName -Count 3 -Quiet
+      Invoke-Command -ComputerName $ComputerName -ScriptBlock {$ENV:Computername}
+		}
+
+
+		# Queue up WINRM tests
+		$Device.GetEnumerator() | ForEach-Object {
+
+			$ScanCount++
+
+			# Update progress
+			if ($($_.Value).DnsRecordName) {
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).DnsRecordName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			} elseif ($($_.Value).WmiMachineName) {
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).WmiMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			} else {
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to IP address $($($_.Value).IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			}
+
+			# Test connectivity to the machine 
+
+			#Create the PowerShell instance and supply the scriptblock with the other parameters
+			$PowerShell = [System.Management.Automation.PowerShell]::Create().AddScript($ScriptBlock)
+			$PowerShell = $PowerShell.AddArgument($($_.Value).IPAddress)
+
+			#Add the runspace into the PowerShell instance
+			$PowerShell.RunspacePool = $RunspacePool
+
+			$Runspaces.Add((
+					New-Object -TypeName PsObject -Property @{
+						PowerShell = $PowerShell
+						Runspace = $PowerShell.BeginInvoke()
+						HashKey = $_.Key
+					}
+				)) | Out-Null
+
+		}
+
+		# Reset the scan counter
+		$ScanCount = 0
+
+		# Process results as they complete
+		Do {
+			$Runspaces | ForEach-Object {
+
+				If ($_.Runspace.IsCompleted) {
+					try {
+						$HashKey = $_.HashKey
+
+						# This is where the output gets returned
+						$_.PowerShell.EndInvoke($_.Runspace) | ForEach-Object {
+							$Device[$HashKey].IsWinRMAlive = $_
+						} 
+					}
+					catch { }
+					finally {
+						# Cleanup
+						$_.PowerShell.dispose()
+						$_.Runspace = $null
+						$_.PowerShell = $null
+
+						if ($Device[$HashKey].DnsRecordName) {
+							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].DnsRecordName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
+						} elseif ($Device[$HashKey].WmiMachineName) {
+							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
+						} else {
+							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
+						}
+					}
+				} 
+			}
+
+			# Found that in some cases an ACCESS_VIOLATION error occurs if we don't delay a little bit during each iteration 
+			Start-Sleep -Milliseconds 250
+
+			# Clean out unused runspace jobs
+			$Runspaces.clone() | Where-Object { ($_.Runspace -eq $Null) } | ForEach {
+				$Runspaces.remove($_)
+				$ScanCount++
+				Write-Progress -Activity 'Testing WinRM connectivity' -PercentComplete (($ScanCount / $DeviceCount)*100) -Status "$ScanCount of $DeviceCount" -Id $WinRMProgressId -ParentId $ParentProgressId
+			}
+
+		} while (($Runspaces | Where-Object {$_.Runspace -ne $Null} | Measure-Object).Count -gt 0)
+		#endregion
+
+
+		# Count how many devices responded
+		$WinRMAliveDevice = @($Device.GetEnumerator() | Where-Object { $($_.Value).IsPingAlive -eq $true })
+		$DeviceCount = $($WinRMAliveDevice | Measure-Object).Count
+
+		Write-NetworkScanLog -Message 'WinRM connectivity test complete' -MessageLevel Verbose
+		Write-Progress -Activity 'Testing WinRM connectivity' -PercentComplete 100 -Status "$ScanCount addresses tested, $DeviceCount replies" -Id $WinRMProgressId -ParentId $ParentProgressId
 		#endregion
 
 
@@ -1033,6 +1139,7 @@ function Find-IPv4Device {
 		Write-NetworkScanLog -Message 'WMI connectivity test complete' -MessageLevel Verbose
 		Write-Progress -Activity 'Testing PING connectivity' -PercentComplete 100 -Status 'Complete' -Id $PingProgressId -ParentId $ParentProgressId -Completed
 		Write-Progress -Activity 'Testing WMI connectivity' -PercentComplete 100 -Status 'Complete' -Id $WmiProgressId -ParentId $ParentProgressId -Completed
+		Write-Progress -Activity 'Testing WinRM connectivity' -PercentComplete 100 -Status 'Complete' -Id $WinRMProgressId -ParentId $ParentProgressId -Completed
 
 
 		# Return results
@@ -1042,6 +1149,7 @@ function Find-IPv4Device {
 		Write-NetworkScanLog -Message "`t-IP Addresses Scanned: $($($Device.Values | Measure-Object).Count)" -MessageLevel Information
 		Write-NetworkScanLog -Message "`t-PING Replies: $($($Device.Values | Where-Object { $_.IsPingAlive -eq $true } | Measure-Object).Count)" -MessageLevel Information
 		Write-NetworkScanLog -Message "`t-WMI Replies: $($($Device.Values | Where-Object { $_.IsWmiAlive -eq $true } | Measure-Object).Count)" -MessageLevel Information
+    Write-NetworkScanLog -Message "`t-WinRM Replies: $($($Device.Values | Where-Object { $_.IsWinRMAlive -eq $true } | Measure-Object).Count)" -MessageLevel Information
 
 		Write-NetworkScanLog -Message 'End Function: Find-IPv4Device' -MessageLevel Debug
 
