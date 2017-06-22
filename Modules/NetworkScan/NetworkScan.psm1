@@ -187,6 +187,10 @@ function Get-DeviceScanObject {
 		[System.String]
 		$WmiMachineName = $null
 		,
+		[Parameter(Mandatory=$false)]
+		[System.String]
+		$WinRMMachineName = $null
+		,
 		[Parameter(Mandatory=$true)]
 		[System.Net.IPAddress]
 		$IPAddress
@@ -211,6 +215,7 @@ function Get-DeviceScanObject {
 				IsPingAlive = $IsPingAlive
 				IsWmiAlive = $IsWmiAlive 
 				IsWinRMAlive = $IsWinRMAlive 
+                WinRMMachineName = $WinRMMachineName
 			}
 		)
 	}
@@ -626,7 +631,7 @@ function Find-IPv4Device {
 
 						if ($HasMetCriteria -eq $true) {
 							if (-not ($Device.Values | Where-Object { ($_.DnsRecordName -ieq $HostName) -and ($_.IPAddress -ieq $IPAddress) })) {
-								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false))
+								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -WinRMMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false))
 							} 
 						}
 					}
@@ -686,7 +691,7 @@ function Find-IPv4Device {
 							#if (-not ($Device.Values | Where-Object { ($_.IPAddress -ieq $IPAddress) })) {
 
 							if ($HasMetCriteria -eq $true) {
-								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $null -WmiMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
+								$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $null -WmiMachineName $null -WinRMMachineName $null -IPAddress $IPAddress -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
 							}
 							#}
 						}
@@ -710,7 +715,7 @@ function Find-IPv4Device {
 
 							$_.AddressList | Where-Object { $_.AddressFamily -ieq 'InterNetwork' } | ForEach-Object {
 								if ((($PrivateOnly -eq $true) -and ((Test-PrivateIPAddress -IPAddress $_.IPAddressToString) -eq $true)) -or ($PrivateOnly -eq $false)) {
-									$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -IPAddress $_.IPAddressToString -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
+									$Device.Add([guid]::NewGuid(), (Get-DeviceScanObject -DnsRecordName $HostName -WmiMachineName $null -WinRMMachineName $null -IPAddress $_.IPAddressToString -IsPingAlive $false -IsWmiAlive $false -IsWinRmAlive $false)) 
 								}
 							}
 						}
@@ -758,6 +763,8 @@ function Find-IPv4Device {
 				Write-NetworkScanLog -Message "Testing PING connectivity to $($($_.Value).DnsRecordName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} elseif ($($_.Value).WmiMachineName) {
 				Write-NetworkScanLog -Message "Testing PING connectivity to $($($_.Value).WmiMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			} elseif ($($_.Value).WinRMMachineName) {
+				Write-NetworkScanLog -Message "Testing PING connectivity to $($($_.Value).WinRMMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} else {
 				Write-NetworkScanLog -Message "Testing PING connectivity to IP address $($($_.Value).IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			}
@@ -808,6 +815,8 @@ function Find-IPv4Device {
 							Write-NetworkScanLog -Message "PING response from $($Device[$HashKey].DnsRecordName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsPingAlive)" -MessageLevel Verbose
 						} elseif ($Device[$HashKey].WmiMachineName) {
 							Write-NetworkScanLog -Message "PING response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsPingAlive)" -MessageLevel Verbose
+						} elseif ($Device[$HashKey].WinRMMachineName) {
+							Write-NetworkScanLog -Message "PING response from $($Device[$HashKey].WinRMMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsPingAlive)" -MessageLevel Verbose
 						} else {
 							Write-NetworkScanLog -Message "PING response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsPingAlive)" -MessageLevel Verbose
 						}
@@ -920,6 +929,8 @@ function Find-IPv4Device {
 				Write-NetworkScanLog -Message "Testing WMI connectivity to $($($_.Value).DnsRecordName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} elseif ($($_.Value).WmiMachineName) {
 				Write-NetworkScanLog -Message "Testing WMI connectivity to $($($_.Value).WmiMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			} elseif ($($_.Value).WinRMMachineName) {
+				Write-NetworkScanLog -Message "Testing WMI connectivity to $($($_.Value).WinRMMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} else {
 				Write-NetworkScanLog -Message "Testing WMI connectivity to IP address $($($_.Value).IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			}
@@ -991,6 +1002,8 @@ function Find-IPv4Device {
 							Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].DnsRecordName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
 						} elseif ($Device[$HashKey].WmiMachineName) {
 							Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
+						} elseif ($Device[$HashKey].WinRMMachineName) {
+							Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].WinRMMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
 						} else {
 							Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
 						}
@@ -1010,6 +1023,9 @@ function Find-IPv4Device {
 					} elseif ($Device[$HashKey].WmiMachineName) {
 						Write-NetworkScanLog -Message "Timeout waiting for WMI response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress))" -MessageLevel Warning
 						Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
+					} elseif ($Device[$HashKey].WinRMMachineName) {
+						Write-NetworkScanLog -Message "Timeout waiting for WMI response from $($Device[$HashKey].WinRMMachineName) ($($Device[$HashKey].IPAddress))" -MessageLevel Warning
+						Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].WinRMMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
 					} else {
 						Write-NetworkScanLog -Message "Timeout waiting for WMI response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Warning
 						Write-NetworkScanLog -Message "WMI response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsWmiAlive)" -MessageLevel Verbose
@@ -1036,15 +1052,17 @@ function Find-IPv4Device {
 		$ScanCount = 0
 		$ScriptBlock = {
 			Param (
-				[String]$ComputerName
+				[string]$DNSHostName,
+				[switch]$IncludeDomainName = $false
 			)
-			Test-Connection -ComputerName $ComputerName -Count 3 -Quiet
-      Invoke-Command -ComputerName $ComputerName -ScriptBlock {$ENV:Computername}
+            $Win32_ComputerSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Name -ComputerName $DNSHostName -ErrorAction Stop
+			$ComputerName = $Win32_ComputerSystem.Name
+			Write-Output $ComputerName
 		}
 
 
 		# Queue up WINRM tests
-		$Device.GetEnumerator() | ForEach-Object {
+		$PingAliveDevice | ForEach-Object {
 
 			$ScanCount++
 
@@ -1053,7 +1071,9 @@ function Find-IPv4Device {
 				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).DnsRecordName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} elseif ($($_.Value).WmiMachineName) {
 				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).WmiMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
-			} else {
+			} elseif ($($_.Value).WinRMMachineName) {
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).WinRMMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+            } else {
 				Write-NetworkScanLog -Message "Testing WINRM connectivity to IP address $($($_.Value).IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			}
 
@@ -1061,7 +1081,7 @@ function Find-IPv4Device {
 
 			#Create the PowerShell instance and supply the scriptblock with the other parameters
 			$PowerShell = [System.Management.Automation.PowerShell]::Create().AddScript($ScriptBlock)
-			$PowerShell = $PowerShell.AddArgument($($_.Value).IPAddress)
+			$PowerShell = $PowerShell.AddArgument($($_.Value).DnsRecordName)
 
 			#Add the runspace into the PowerShell instance
 			$PowerShell.RunspacePool = $RunspacePool
@@ -1071,6 +1091,7 @@ function Find-IPv4Device {
 						PowerShell = $PowerShell
 						Runspace = $PowerShell.BeginInvoke()
 						HashKey = $_.Key
+						StartDate = [DateTime]::Now
 					}
 				)) | Out-Null
 
@@ -1085,12 +1106,34 @@ function Find-IPv4Device {
 
 				If ($_.Runspace.IsCompleted) {
 					try {
+						$_.PowerShell.EndInvoke($_.Runspace) | ForEach-Object {
+							$HostName = $_
+						} # This is where the output gets returned
+
 						$HashKey = $_.HashKey
 
-						# This is where the output gets returned
-						$_.PowerShell.EndInvoke($_.Runspace) | ForEach-Object {
-							$Device[$HashKey].IsWinRMAlive = $_
-						} 
+						$Device[$HashKey].WinRMMachineName = $HostName # This is where the output gets returned
+						$Device[$HashKey].IsWinRMAlive = $true
+
+
+						# Double check that we've got a DNS Hostname. If not, get it from DNS
+						# If we do have a DNS Hostname that doesn't begin with the WMI Machine Name and $ResolveAliases is true, get the machine name from DNS
+						if (
+							!$Device[$HashKey].DnsRecordName -or
+							(
+								$ResolveAliases -eq $true -and 
+								$Device[$HashKey].DnsRecordName.StartsWith($HostName, 'CurrentCultureIgnoreCase') -ne $true
+							)
+						) {
+							try {
+								[System.Net.Dns]::GetHostByName($HostName) | ForEach-Object {
+									$Device[$HashKey].DnsRecordName = $_.HostName.ToUpper()
+								}
+							} catch {
+								# Fallback to using the WMI machine name as the DNS host name in the event there's an error
+								$Device[$HashKey].DnsRecordName = $HostName
+							}
+						}
 					}
 					catch { }
 					finally {
@@ -1103,6 +1146,8 @@ function Find-IPv4Device {
 							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].DnsRecordName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
 						} elseif ($Device[$HashKey].WmiMachineName) {
 							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].WmiMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
+						} elseif ($Device[$HashKey].WinRMMachineName) {
+							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].WinRMMachineName) ($($Device[$HashKey].IPAddress)): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
 						} else {
 							Write-NetworkScanLog -Message "WinRM response from $($Device[$HashKey].IPAddress): $($Device[$HashKey].IsWinRMAlive)" -MessageLevel Verbose
 						}
