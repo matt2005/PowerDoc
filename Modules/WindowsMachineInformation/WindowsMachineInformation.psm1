@@ -1425,30 +1425,30 @@ function Get-OSLanguage($LanguageCode) {
 	Write-Output $(
 		switch ($LanguageCode) {
 			1 {'Arabic'}
-			4 {'Chinese (Simplified)– China'}
+			4 {'Chinese (Simplified)- China'}
 			9 {'English'}
-			1025 {'Arabic – Saudi Arabia'}
+			1025 {'Arabic - Saudi Arabia'}
 			1026 {'Bulgarian'}
 			1027 {'Catalan'}
-			1028 {'Chinese (Traditional) – Taiwan'}
+			1028 {'Chinese (Traditional) - Taiwan'}
 			1029 {'Czech'}
 			1030 {'Danish'}
-			1031 {'German – Germany'}
+			1031 {'German - Germany'}
 			1032 {'Greek'}
-			1033 {'English – United States'}
-			1034 {'Spanish – Traditional Sort'}
+			1033 {'English - United States'}
+			1034 {'Spanish - Traditional Sort'}
 			1035 {'Finnish'}
-			1036 {'French – France'}
+			1036 {'French - France'}
 			1037 {'Hebrew'}
 			1038 {'Hungarian'}
 			1039 {'Icelandic'}
-			1040 {'Italian – Italy'}
+			1040 {'Italian - Italy'}
 			1041 {'Japanese'}
 			1042 {'Korean'}
-			1043 {'Dutch – Netherlands'}
-			1044 {'Norwegian – Bokmal'}
+			1043 {'Dutch - Netherlands'}
+			1044 {'Norwegian - Bokmal'}
 			1045 {'Polish'}
-			1046 {'Portuguese – Brazil'}
+			1046 {'Portuguese - Brazil'}
 			1047 {'Rhaeto-Romanic'}
 			1048 {'Romanian'}
 			1049 {'Russian'}
@@ -1468,7 +1468,7 @@ function Get-OSLanguage($LanguageCode) {
 			1063 {'Lithuanian'}
 			1065 {'Persian'}
 			1066 {'Vietnamese'}
-			1069 {'Basque (Basque) – Basque'}
+			1069 {'Basque (Basque) - Basque'}
 			1070 {'Serbian'}
 			1071 {'Macedonian (FYROM)'}
 			1072 {'Sutu'}
@@ -1482,70 +1482,70 @@ function Get-OSLanguage($LanguageCode) {
 			1082 {'Maltese'}
 			1084 {'Scottish Gaelic (United Kingdom)'}
 			1085 {'Yiddish'}
-			1086 {'Malay – Malaysia'}
-			2049 {'Arabic – Iraq'}
-			2052 {'Chinese (Simplified) – PRC'}
-			2055 {'German – Switzerland'}
-			2057 {'English – United Kingdom'}
-			2058 {'Spanish – Mexico'}
-			2060 {'French – Belgium'}
-			2064 {'Italian – Switzerland'}
-			2067 {'Dutch – Belgium'}
-			2068 {'Norwegian – Nynorsk'}
-			2070 {'Portuguese – Portugal'}
-			2072 {'Romanian – Moldova'}
-			2073 {'Russian – Moldova'}
-			2074 {'Serbian – Latin'}
-			2077 {'Swedish – Finland'}
-			3073 {'Arabic – Egypt'}
-			3076 {'Chinese (Traditional) – Hong Kong SAR'}
-			3079 {'German – Austria'}
-			3081 {'English – Australia'}
-			3082 {'Spanish – International Sort'}
-			3084 {'French – Canada'}
-			3098 {'Serbian – Cyrillic'}
-			4097 {'Arabic – Libya'}
-			4100 {'Chinese (Simplified) – Singapore'}
-			4103 {'German – Luxembourg'}
-			4105 {'English – Canada'}
-			4106 {'Spanish – Guatemala'}
-			4108 {'French – Switzerland'}
-			5121 {'Arabic – Algeria'}
-			5127 {'German – Liechtenstein'}
-			5129 {'English – New Zealand'}
-			5130 {'Spanish – Costa Rica'}
-			5132 {'French – Luxembourg'}
-			6145 {'Arabic – Morocco'}
-			6153 {'English – Ireland'}
-			6154 {'Spanish – Panama'}
-			7169 {'Arabic – Tunisia'}
-			7177 {'English – South Africa'}
-			7178 {'Spanish – Dominican Republic'}
-			8193 {'Arabic – Oman'}
-			8201 {'English – Jamaica'}
-			8202 {'Spanish – Venezuela'}
-			9217 {'Arabic – Yemen'}
-			9226 {'Spanish – Colombia'}
-			10241 {'Arabic – Syria'}
-			10249 {'English – Belize'}
-			10250 {'Spanish – Peru'}
-			11265 {'Arabic – Jordan'}
-			11273 {'English – Trinidad'}
-			11274 {'Spanish – Argentina'}
-			12289 {'Arabic – Lebanon'}
-			12298 {'Spanish – Ecuador'}
-			13313 {'Arabic – Kuwait'}
-			13322 {'Spanish – Chile'}
-			14337 {'Arabic – U.A.E.'}
-			14346 {'Spanish – Uruguay'}
-			15361 {'Arabic – Bahrain'}
-			15370 {'Spanish – Paraguay'}
-			16385 {'Arabic – Qatar'}
-			16394 {'Spanish – Bolivia'}
-			17418 {'Spanish – El Salvador'}
-			18442 {'Spanish – Honduras'}
-			19466 {'Spanish – Nicaragua'}
-			20490 {'Spanish – Puerto Rico'}
+			1086 {'Malay - Malaysia'}
+			2049 {'Arabic - Iraq'}
+			2052 {'Chinese (Simplified) - PRC'}
+			2055 {'German - Switzerland'}
+			2057 {'English - United Kingdom'}
+			2058 {'Spanish - Mexico'}
+			2060 {'French - Belgium'}
+			2064 {'Italian - Switzerland'}
+			2067 {'Dutch - Belgium'}
+			2068 {'Norwegian - Nynorsk'}
+			2070 {'Portuguese - Portugal'}
+			2072 {'Romanian - Moldova'}
+			2073 {'Russian - Moldova'}
+			2074 {'Serbian - Latin'}
+			2077 {'Swedish - Finland'}
+			3073 {'Arabic - Egypt'}
+			3076 {'Chinese (Traditional) - Hong Kong SAR'}
+			3079 {'German - Austria'}
+			3081 {'English - Australia'}
+			3082 {'Spanish - International Sort'}
+			3084 {'French - Canada'}
+			3098 {'Serbian - Cyrillic'}
+			4097 {'Arabic - Libya'}
+			4100 {'Chinese (Simplified) - Singapore'}
+			4103 {'German - Luxembourg'}
+			4105 {'English - Canada'}
+			4106 {'Spanish - Guatemala'}
+			4108 {'French - Switzerland'}
+			5121 {'Arabic - Algeria'}
+			5127 {'German - Liechtenstein'}
+			5129 {'English - New Zealand'}
+			5130 {'Spanish - Costa Rica'}
+			5132 {'French - Luxembourg'}
+			6145 {'Arabic - Morocco'}
+			6153 {'English - Ireland'}
+			6154 {'Spanish - Panama'}
+			7169 {'Arabic - Tunisia'}
+			7177 {'English - South Africa'}
+			7178 {'Spanish - Dominican Republic'}
+			8193 {'Arabic - Oman'}
+			8201 {'English - Jamaica'}
+			8202 {'Spanish - Venezuela'}
+			9217 {'Arabic - Yemen'}
+			9226 {'Spanish - Colombia'}
+			10241 {'Arabic - Syria'}
+			10249 {'English - Belize'}
+			10250 {'Spanish - Peru'}
+			11265 {'Arabic - Jordan'}
+			11273 {'English - Trinidad'}
+			11274 {'Spanish - Argentina'}
+			12289 {'Arabic - Lebanon'}
+			12298 {'Spanish - Ecuador'}
+			13313 {'Arabic - Kuwait'}
+			13322 {'Spanish - Chile'}
+			14337 {'Arabic - U.A.E.'}
+			14346 {'Spanish - Uruguay'}
+			15361 {'Arabic - Bahrain'}
+			15370 {'Spanish - Paraguay'}
+			16385 {'Arabic - Qatar'}
+			16394 {'Spanish - Bolivia'}
+			17418 {'Spanish - El Salvador'}
+			18442 {'Spanish - Honduras'}
+			19466 {'Spanish - Nicaragua'}
+			20490 {'Spanish - Puerto Rico'}
 			default {'Unknown (Undocumented)'} 
 		}
 	)
@@ -1556,14 +1556,16 @@ function Get-OSLanguage($LanguageCode) {
 # WMI FUNCTIONS
 ######################
 
-function Get-OSInfo([string]$Computer) {
+function Get-OSInfo([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_OperatingSystem: http://msdn.microsoft.com/en-us/library/aa394239(VS.85).aspx
 
 	$OSInfo = $null
 
 	#$Win32_OperatingSystem = Get-WmiObjectWithTimeout -Namespace root\CIMV2 -Class Win32_OperatingSystem -Property Name, CSDVersion, InstallDate, OSLanguage, Version, WindowsDirectory -ComputerName $Computer
-	$Win32_OperatingSystem = Get-WmiObject -Namespace root\CIMV2 -Class Win32_OperatingSystem -Property Name, CSDVersion, InstallDate, OSLanguage, Version, WindowsDirectory -ComputerName $Computer
-
+Switch ($type){
+  'WMI' {$Win32_OperatingSystem = Get-WmiObject -Namespace root\CIMV2 -Class Win32_OperatingSystem -Property Name, CSDVersion, InstallDate, OSLanguage, Version, WindowsDirectory -ComputerName $Computer}
+  'CIM' {$Win32_OperatingSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_OperatingSystem -Property Name, CSDVersion, InstallDate, OSLanguage, Version, WindowsDirectory -ComputerName $Computer}
+}
 	# This call should only bring back 1 row but just in case there are more we'll iterate through and make the last one the winner
 	$Win32_OperatingSystem | ForEach-Object {
 		$OSInfo = New-Object -TypeName psobject -Property @{
@@ -1587,14 +1589,16 @@ function Get-OSInfo([string]$Computer) {
 
 }
 
-function Get-BIOSInfo([string]$Computer) {
+function Get-BIOSInfo([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_BIOS: http://msdn.microsoft.com/en-us/library/aa394077(VS.85).aspx
 
 	$BIOSInfo = $null
 
 	#$Win32_BIOS = Get-WmiObjectWithTimeout -Namespace root\CIMV2 -Class Win32_BIOS -Property BiosCharacteristics, SMBIOSBIOSVersion, SMBIOSMajorVersion, SMBIOSMinorVersion, Version -ComputerName $Computer
-	$Win32_BIOS = Get-WmiObject -Namespace root\CIMV2 -Class Win32_BIOS -Property BiosCharacteristics, SMBIOSBIOSVersion, SMBIOSMajorVersion, SMBIOSMinorVersion, Version -ComputerName $Computer
-
+Switch ($type){
+  'WMI' {$Win32_BIOS = Get-WmiObject -Namespace root\CIMV2 -Class Win32_BIOS -Property BiosCharacteristics, SMBIOSBIOSVersion, SMBIOSMajorVersion, SMBIOSMinorVersion, Version -ComputerName $Computer}
+  'CIM' {$Win32_BIOS = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_BIOS -Property BiosCharacteristics, SMBIOSBIOSVersion, SMBIOSMajorVersion, SMBIOSMinorVersion, Version -ComputerName $Computer}
+}
 	# This call should only bring back 1 row but just in case there are more we'll iterate through and make the last one the winner
 	$Win32_BIOS | ForEach-Object {
 		$BIOSInfo = New-Object -TypeName psobject -Property @{
@@ -1615,7 +1619,7 @@ function Get-BIOSInfo([string]$Computer) {
 	Remove-Variable -Name BIOSInfo, Win32_BIOS
 }
 
-function Get-SystemInformation([string]$Computer) {
+function Get-SystemInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_ComputerSystem: http://msdn.microsoft.com/en-us/library/aa394102(VS.85).aspx
 
 	$SystemInformation = $null
@@ -1624,7 +1628,10 @@ function Get-SystemInformation([string]$Computer) {
 
 	$ComputerSystem = $null
 	#$Win32_ComputerSystem = Get-WmiObjectWithTimeout -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Domain, DomainRole, Name, NumberOfProcessors, TotalPhysicalMemory -ComputerName $Computer
-	$Win32_ComputerSystem = Get-WmiObject -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Domain, DomainRole, Name, NumberOfProcessors, TotalPhysicalMemory -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_ComputerSystem = Get-WmiObject -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Domain, DomainRole, Name, NumberOfProcessors, TotalPhysicalMemory -ComputerName $Computer}
+  'CIM' {$Win32_ComputerSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Domain, DomainRole, Name, NumberOfProcessors, TotalPhysicalMemory -ComputerName $Computer}
+}
 
 	$Win32_ComputerSystem | ForEach-Object {
 
@@ -1720,14 +1727,17 @@ function Get-SystemInformation([string]$Computer) {
 	Remove-Variable -Name SystemInformation, ComputerRole, DomainType, ComputerSystem, Win32_ComputerSystem
 }
 
-function Get-CDROMInformation([string]$Computer) {
+function Get-CDROMInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_CDROMDrive: http://msdn.microsoft.com/en-us/library/aa394081(VS.85).aspx
 
 	$CDROMInformation = @()
 	$CDROMDrive = $null
 
 	#$Win32_CDROMDrive = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_CDROMDrive -Property Drive, Manufacturer, Name -ComputerName $Computer
-	$Win32_CDROMDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_CDROMDrive -Property Drive, Manufacturer, Name -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_CDROMDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_CDROMDrive -Property Drive, Manufacturer, Name -ComputerName $Computer}
+  'CIM' {$Win32_CDROMDrive = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_CDROMDrive -Property Drive, Manufacturer, Name -ComputerName $Computer}
+}
 
 	$Win32_CDROMDrive | Sort-Object -Property Drive | ForEach-Object {
 
@@ -1749,13 +1759,16 @@ function Get-CDROMInformation([string]$Computer) {
 	Remove-Variable -Name CDROMInformation, CDROMDrive, Win32_CDROMDrive
 }
 
-function Get-ComputerSystemProductInformation([string]$Computer) {
+function Get-ComputerSystemProductInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_ComputerSystemProduct: http://msdn.microsoft.com/en-us/library/aa394105(VS.85).aspx
 
 	$ComputerSystemProductInformation = $null
 
 	#$Win32_ComputerSystemProduct = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_ComputerSystemProduct -Property Vendor, Name, IdentifyingNumber, Version -ComputerName $Computer
-	$Win32_ComputerSystemProduct = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ComputerSystemProduct -Property Vendor, Name, IdentifyingNumber, Version -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_ComputerSystemProduct = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ComputerSystemProduct -Property Vendor, Name, IdentifyingNumber, Version -ComputerName $Computer}
+  'CIM' {$Win32_ComputerSystemProduct = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystemProduct -Property Vendor, Name, IdentifyingNumber, Version -ComputerName $Computer}
+}
 
 	# This call should only bring back 1 row but just in case there are more we'll iterate through and make the last one the winner
 	$Win32_ComputerSystemProduct | ForEach-Object {
@@ -1776,7 +1789,7 @@ function Get-ComputerSystemProductInformation([string]$Computer) {
 	Remove-Variable -Name ComputerSystemProductInformation, Win32_ComputerSystemProduct
 }
 
-function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
+function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_DiskDrive: http://msdn.microsoft.com/en-us/library/aa394132(VS.85).aspx
 	# Win32_DiskDriveToDiskPartition: http://msdn.microsoft.com/en-us/library/aa394134(VS.85).aspx
 	# Win32_DiskPartition: http://msdn.microsoft.com/en-us/library/aa394135(VS.85).aspx
@@ -1796,7 +1809,10 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
 	$AllocationUnitSizeBytes = $null
 
 	#$Win32_DiskDrive = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_DiskDrive -Property Caption, DeviceID, Interfacetype, Size -ComputerName $Computer
-	$Win32_DiskDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_DiskDrive -Property Caption, DeviceID, Interfacetype, Size -ComputerName $Computer
+Switch ($type){
+  'WMI' {	$Win32_DiskDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_DiskDrive -Property Caption, DeviceID, Interfacetype, Size -ComputerName $Computer}
+  'CIM' {	$Win32_DiskDrive = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_DiskDrive -Property Caption, DeviceID, Interfacetype, Size -ComputerName $Computer}
+}
 
 	#$WMIObject | Get-Member -MemberType Property | Format-Table -Property "Name"
 
@@ -1828,7 +1844,10 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
 
 		$DeviceID = $_.DeviceID.Replace('\','\\')
 		#$Win32_DiskPartition = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskDrive.DeviceID=""$DeviceID""} WHERE AssocClass = Win32_DiskDriveToDiskPartition" -ComputerName $Computer
-		$Win32_DiskPartition = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskDrive.DeviceID=""$DeviceID""} WHERE ResultClass = Win32_DiskPartition" -ComputerName $Computer
+Switch ($type){
+  'WMI' {$Win32_DiskPartition = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskDrive.DeviceID=""$DeviceID""} WHERE ResultClass = Win32_DiskPartition" -ComputerName $Computer}
+  'CIM' {$Win32_DiskPartition = Get-CIMInstance -Namespace root\CIMV2 -Query "Associators of {Win32_DiskDrive.DeviceID=""$DeviceID""} WHERE ResultClass = Win32_DiskPartition" -ComputerName $Computer}
+}
 		#$Win32_DiskPartition = $_.GetRelated("Win32_DiskPartition")
 
 		$Win32_DiskPartition | Where-Object { $_.DeviceID } | ForEach-Object {
@@ -1847,7 +1866,10 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
 
 			$PartitionDeviceID = $_.DeviceID
 			#$Win32_LogicalDisk = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskPartition.DeviceID=""$PartitionDeviceID""} WHERE AssocClass = Win32_LogicalDiskToPartition" -ComputerName $Computer
-			$Win32_LogicalDisk = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskPartition.DeviceID=""$PartitionDeviceID""} WHERE ResultClass = Win32_LogicalDisk" -ComputerName $Computer
+			Switch ($type){
+  'WMI' {$Win32_LogicalDisk = Get-WmiObject -Namespace root\CIMV2 -Query "Associators of {Win32_DiskPartition.DeviceID=""$PartitionDeviceID""} WHERE ResultClass = Win32_LogicalDisk" -ComputerName $Computer}
+  'CIM' {$Win32_LogicalDisk = Get-CIMInstance -Namespace root\CIMV2 -Query "Associators of {Win32_DiskPartition.DeviceID=""$PartitionDeviceID""} WHERE ResultClass = Win32_LogicalDisk" -ComputerName $Computer}
+}
 			#$Win32_LogicalDisk = $_.GetRelated("Win32_LogicalDisk")
 
 			$Win32_LogicalDisk | Where-Object { $_.DeviceID } | ForEach-Object {
@@ -1866,7 +1888,10 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
 
 						# Method 2 - using drive letter
 						#$Win32_Volume = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Volume -Property BlockSize -Filter "DriveLetter = ""$($_.DeviceID)""" -ComputerName $Computer
-						$Win32_Volume = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Volume -Property BlockSize -Filter "DriveLetter = ""$($_.DeviceID)""" -ComputerName $Computer
+						Switch ($type){
+  'WMI' {$Win32_Volume = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Volume -Property BlockSize -Filter "DriveLetter = ""$($_.DeviceID)""" -ComputerName $Computer}
+  'CIM' {$Win32_Volume = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Volume -Property BlockSize -Filter "DriveLetter = ""$($_.DeviceID)""" -ComputerName $Computer}
+}
 
 						$AllocationUnitSizeBytes = $Win32_Volume.BlockSize
 
@@ -1907,7 +1932,7 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion) {
 
 }
 
-function Get-LocalGroupsInformation([string]$Computer, [System.Version]$OSVersion) {
+function Get-LocalGroupsInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Group: http://msdn.microsoft.com/en-us/library/aa394151(VS.85).aspx
 	# Win32_GroupUser: http://msdn.microsoft.com/en-us/library/aa394153(VS.85).aspx
 
@@ -1921,10 +1946,17 @@ function Get-LocalGroupsInformation([string]$Computer, [System.Version]$OSVersio
 	# Query is different for Windows 2000 vs. Windows XP and higher
 	if ($OSVersion.CompareTo($WindowsXP) -ge 0) {
 		#$Win32_Group = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter 'LocalAccount = True' -ComputerName $Computer
-		$Win32_Group = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter 'LocalAccount = True' -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_Group = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter 'LocalAccount = True' -ComputerName $Computer}
+  'CIM' {$Win32_Group = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter 'LocalAccount = True' -ComputerName $Computer}
+}
 	} else {
 		#$Win32_Group = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter "(__SERVER = Domain) or (Domain = 'BUILTIN')" -ComputerName $Computer
-		$Win32_Group = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter "(__SERVER = Domain) or (Domain = 'BUILTIN')" -ComputerName $Computer
+		
+Switch ($type){
+  'WMI' {$Win32_Group = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter "(__SERVER = Domain) or (Domain = 'BUILTIN')" -ComputerName $Computer}
+  'CIM' {$Win32_Group = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Group -Property Name, Domain -Filter "(__SERVER = Domain) or (Domain = 'BUILTIN')" -ComputerName $Computer}
+}
 	}
 
 	$Win32_Group | Sort-Object -Property Name | ForEach-Object {
@@ -1939,7 +1971,10 @@ function Get-LocalGroupsInformation([string]$Computer, [System.Version]$OSVersio
 		#Get-WmiObject -Query "Select PartComponent from Win32_GroupUser where GroupComponent='Win32_Group.Domain=""T420WIN7-005"",Name=""Administrators""'"
 
 		#$Win32_GroupUser = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_GroupUser -Property PartComponent -Filter "GroupComponent='Win32_Group.Domain=""$($_.Domain)"",Name=""$($_.Name)""'" -ComputerName $Computer
-		$Win32_GroupUser = Get-WMIObject -Namespace root\CIMV2 -Class Win32_GroupUser -Property PartComponent -Filter "GroupComponent='Win32_Group.Domain=""$($_.Domain)"",Name=""$($_.Name)""'" -ComputerName $Computer
+Switch ($type){
+  'WMI' {$Win32_GroupUser = Get-WMIObject -Namespace root\CIMV2 -Class Win32_GroupUser -Property PartComponent -Filter "GroupComponent='Win32_Group.Domain=""$($_.Domain)"",Name=""$($_.Name)""'" -ComputerName $Computer}
+  'CIM' {$Win32_GroupUser = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_GroupUser -Property PartComponent -Filter "GroupComponent='Win32_Group.Domain=""$($_.Domain)"",Name=""$($_.Name)""'" -ComputerName $Computer}
+}
 
 		$Win32_GroupUser | Sort-Object -Property PartComponent | ForEach-Object {
 
@@ -1967,15 +2002,17 @@ function Get-LocalGroupsInformation([string]$Computer, [System.Version]$OSVersio
 
 }
 
-function Get-IpRouteInformation([string]$Computer) {
+function Get-IpRouteInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_IP4RouteTable: http://msdn.microsoft.com/en-us/library/aa394162(VS.85).aspx
 
 	$IpRouteInformation = @()
 	$Route = $null
 
 	#$Win32_IP4RouteTable = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_IP4RouteTable -Property Destination, Mask, NextHop, Metric1, Metric2, Metric3, Metric4, Metric5 -ComputerName $Computer
-	$Win32_IP4RouteTable = Get-WMIObject -Namespace root\CIMV2 -Class Win32_IP4RouteTable -Property Destination, Mask, NextHop, Metric1, Metric2, Metric3, Metric4, Metric5 -ComputerName $Computer
-
+	Switch ($type){
+  'WMI' {$Win32_IP4RouteTable = Get-WMIObject -Namespace root\CIMV2 -Class Win32_IP4RouteTable -Property Destination, Mask, NextHop, Metric1, Metric2, Metric3, Metric4, Metric5 -ComputerName $Computer}
+  'CIM' {$Win32_IP4RouteTable = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_IP4RouteTable -Property Destination, Mask, NextHop, Metric1, Metric2, Metric3, Metric4, Metric5 -ComputerName $Computer}
+}
 	$Win32_IP4RouteTable | ForEach-Object {
 		$Route = New-Object -TypeName psobject -Property @{
 			Destination = $_.Destination
@@ -2095,14 +2132,17 @@ function Get-DesktopSessionInformation([string]$Computer) {
 }
 
 
-function Get-NetworkAdapterConfig([string]$Computer) {
+function Get-NetworkAdapterConfig([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_NetworkAdapterConfiguration: http://msdn.microsoft.com/en-us/library/aa394217(VS.85).aspx
 
 	$NetworkAdapterConfig = @()
 	$Adapter = $null 
 
 	#$Win32_NetworkAdapterConfiguration = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_NetworkAdapterConfiguration -Property Description, MACAddress, DNSHostName, DHCPEnabled, DHCPServer, DNSDomain, WINSPrimaryServer, WINSSecondaryServer, IPAddress, IPSubnet, DefaultIPGateway, DNSServerSearchOrder -Filter 'IPEnabled = True' -ComputerName $Computer
-	$Win32_NetworkAdapterConfiguration = Get-WMIObject -Namespace root\CIMV2 -Class Win32_NetworkAdapterConfiguration -Property Description, MACAddress, DNSHostName, DHCPEnabled, DHCPServer, DNSDomain, WINSPrimaryServer, WINSSecondaryServer, IPAddress, IPSubnet, DefaultIPGateway, DNSServerSearchOrder -Filter 'IPEnabled = True' -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_NetworkAdapterConfiguration = Get-WMIObject -Namespace root\CIMV2 -Class Win32_NetworkAdapterConfiguration -Property Description, MACAddress, DNSHostName, DHCPEnabled, DHCPServer, DNSDomain, WINSPrimaryServer, WINSSecondaryServer, IPAddress, IPSubnet, DefaultIPGateway, DNSServerSearchOrder -Filter 'IPEnabled = True' -ComputerName $Computer}
+  'CIM' {$Win32_NetworkAdapterConfiguration = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_NetworkAdapterConfiguration -Property Description, MACAddress, DNSHostName, DHCPEnabled, DHCPServer, DNSDomain, WINSPrimaryServer, WINSSecondaryServer, IPAddress, IPSubnet, DefaultIPGateway, DNSServerSearchOrder -Filter 'IPEnabled = True' -ComputerName $Computer}
+}
 
 	$Win32_NetworkAdapterConfiguration | ForEach-Object {
 
@@ -2133,14 +2173,18 @@ function Get-NetworkAdapterConfig([string]$Computer) {
 	Remove-Variable -Name NetworkAdapterConfig, Adapter, Win32_NetworkAdapterConfiguration
 }
 
-function Get-EventLogSettings([string]$Computer) {
+function Get-EventLogSettings([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_NTEventLogFile: http://msdn.microsoft.com/en-us/library/aa394225(VS.85).aspx
 
 	$EventLogSettings = @()
 	$EventLog = $null
 
 	#$Win32_NTEventLogFile = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_NTEventlogFile -Property LogFileName, MaxFileSize, Name, OverwritePolicy -ComputerName $Computer
-	$Win32_NTEventLogFile = Get-WMIObject -Namespace root\CIMV2 -Class Win32_NTEventlogFile -Property LogFileName, MaxFileSize, Name, OverwritePolicy -ComputerName $Computer
+	
+Switch ($type){
+  'WMI' {$Win32_NTEventLogFile = Get-WMIObject -Namespace root\CIMV2 -Class Win32_NTEventlogFile -Property LogFileName, MaxFileSize, Name, OverwritePolicy -ComputerName $Computer}
+  'CIM' {$Win32_NTEventLogFile = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_NTEventlogFile -Property LogFileName, MaxFileSize, Name, OverwritePolicy -ComputerName $Computer}
+}
 
 	$Win32_NTEventLogFile | ForEach-Object {
 
@@ -2163,7 +2207,7 @@ function Get-EventLogSettings([string]$Computer) {
 	Remove-Variable -Name EventLogSettings, EventLog, Win32_NTEventLogFile
 }
 
-function Get-PagefileInformation([string]$Computer, [System.Version]$OSVersion) {
+function Get-PagefileInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_ComputerSystem: http://msdn.microsoft.com/en-us/library/aa394102(VS.85).aspx
 	# Win32_PageFileUsage: http://msdn.microsoft.com/en-us/library/aa394246(VS.85).aspx
 	# Win32_PageFileSetting: http://msdn.microsoft.com/en-us/library/aa394245(VS.85).aspx
@@ -2185,7 +2229,10 @@ function Get-PagefileInformation([string]$Computer, [System.Version]$OSVersion) 
 	# Windows Vista & 2008 introduced Automatic Page File Settings.
 	if ($OSVersion.CompareTo($WindowsVista) -ge 0) {
 		#$Win32_ComputerSystem = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property AutomaticManagedPagefile -ComputerName $Computer
-		$Win32_ComputerSystem = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property AutomaticManagedPagefile -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_ComputerSystem = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property AutomaticManagedPagefile -ComputerName $Computer}
+  'CIM' {$Win32_ComputerSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property AutomaticManagedPagefile -ComputerName $Computer}
+}
 		if ( $Win32_ComputerSystem.AutomaticManagedPagefile -ieq 'true') { 
 			$AutomaticManagedPagefile = $true
 		}
@@ -2194,17 +2241,26 @@ function Get-PagefileInformation([string]$Computer, [System.Version]$OSVersion) 
 	# TempPageFile not available via WMI in Windows 2000 and below
 	if ($OSVersion.CompareTo($WindowsXP) -ge 0) {
 		#$Win32_PageFileUsage = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage, TempPageFile -ComputerName $Computer
-		$Win32_PageFileUsage = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage, TempPageFile -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_PageFileUsage = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage, TempPageFile -ComputerName $Computer}
+  'CIM' {$Win32_PageFileUsage = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage, TempPageFile -ComputerName $Computer}
+}
 	} else {
 		#$Win32_PageFileUsage = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage -ComputerName $Computer
-		$Win32_PageFileUsage = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_PageFileUsage = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage -ComputerName $Computer}
+  'CIM' {$Win32_PageFileUsage = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_PageFileUsage -Property AllocatedBaseSize, CurrentUsage, Name, PeakUsage -ComputerName $Computer}
+}
 	}
 
 	$Win32_PageFileUsage | Sort-Object -Property Name | ForEach-Object {
 
 		if ($AutomaticManagedPagefile -ne $true) {
 			#$Win32_PageFileSetting = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_PageFileSetting -Property MaximumSize -Filter "Name = '$($_.Name.Replace(""\"",""\\""))'" -ComputerName $Computer
-			$Win32_PageFileSetting = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileSetting -Property MaximumSize -Filter "Name = '$($_.Name.Replace(""\"",""\\""))'" -ComputerName $Computer
+			Switch ($type){
+  'WMI' {$Win32_PageFileSetting = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PageFileSetting -Property MaximumSize -Filter "Name = '$($_.Name.Replace(""\"",""\\""))'" -ComputerName $Computer}
+  'CIM' {$Win32_PageFileSetting = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_PageFileSetting -Property MaximumSize -Filter "Name = '$($_.Name.Replace(""\"",""\\""))'" -ComputerName $Computer}
+}
 			$MaximumSizeMB = $Win32_PageFileSetting.MaximumSize
 		} else {
 			$MaximumSizeMB = $null
@@ -2233,7 +2289,7 @@ function Get-PagefileInformation([string]$Computer, [System.Version]$OSVersion) 
 
 }
 
-function Get-PhysicalMemoryInformation([string]$Computer) {
+function Get-PhysicalMemoryInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_PhysicalMemory: http://msdn.microsoft.com/en-us/library/aa394347(VS.85).aspx
 
 	$PhysicalMemoryInformation = @()
@@ -2242,7 +2298,10 @@ function Get-PhysicalMemoryInformation([string]$Computer) {
 	$HotSwappable = $null
 
 	#$Win32_PhysicalMemory = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_PhysicalMemory -Property BankLabel, Capacity, DeviceLocator, FormFactor, HotSwappable, Manufacturer, MemoryType, PartNumber, SerialNumber, Speed, TypeDetail -ComputerName $Computer
-	$Win32_PhysicalMemory = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PhysicalMemory -Property BankLabel, Capacity, DeviceLocator, FormFactor, HotSwappable, Manufacturer, MemoryType, PartNumber, SerialNumber, Speed, TypeDetail -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_PhysicalMemory = Get-WMIObject -Namespace root\CIMV2 -Class Win32_PhysicalMemory -Property BankLabel, Capacity, DeviceLocator, FormFactor, HotSwappable, Manufacturer, MemoryType, PartNumber, SerialNumber, Speed, TypeDetail -ComputerName $Computer}
+  'CIM' {$Win32_PhysicalMemory = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_PhysicalMemory -Property BankLabel, Capacity, DeviceLocator, FormFactor, HotSwappable, Manufacturer, MemoryType, PartNumber, SerialNumber, Speed, TypeDetail -ComputerName $Computer}
+}
 
 	$Win32_PhysicalMemory | Sort-Object -Property @{Expression={$_['BankLabel']};Descending=$true}, @{Expression={$_['DeviceLocator']};Ascending=$true} | ForEach-Object {
 
@@ -2282,7 +2341,7 @@ function Get-PhysicalMemoryInformation([string]$Computer) {
 	Write-Output $PhysicalMemoryInformation
 }
 
-function Get-PowerPlanInformation([string]$Computer) {
+function Get-PowerPlanInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_PowerPlan: http://msdn.microsoft.com/en-us/library/dd904531(VS.85).aspx
 	# Win32_PowerSettingDataIndex: http://msdn.microsoft.com/en-us/library/dd904534(VS.85).aspx
 	# Win32_PowerSetting: http://msdn.microsoft.com/en-us/library/dd904532(VS.85).aspx
@@ -2293,7 +2352,11 @@ function Get-PowerPlanInformation([string]$Computer) {
 
 	try {
 		#$Win32_PowerPlan = Get-WMIObjectWithTimeout -Namespace root\CIMV2\power -Class Win32_PowerPlan -Property ElementName, Description, IsActive -ComputerName $Computer -ErrorAction Stop
-		$Win32_PowerPlan = Get-WMIObject -Namespace root\CIMV2\power -Class Win32_PowerPlan -Property ElementName, Description, IsActive -ComputerName $Computer -ErrorAction Stop
+		
+Switch ($type){
+  'WMI' {$Win32_PowerPlan = Get-WMIObject -Namespace root\CIMV2\power -Class Win32_PowerPlan -Property ElementName, Description, IsActive -ComputerName $Computer -ErrorAction Stop}
+  'CIM' {$Win32_PowerPlan = Get-CIMInstance -Namespace root\CIMV2\power -Class Win32_PowerPlan -Property ElementName, Description, IsActive -ComputerName $Computer -ErrorAction Stop}
+}
 	}
 	catch {
 		Write-WindowsMachineInformationLog -Message "`t[$Computer] Unable to gather information about power plans: Check that Win32_PowerPlan class is installed" -MessageLevel Warning
@@ -2320,14 +2383,18 @@ function Get-PowerPlanInformation([string]$Computer) {
 	Remove-Variable -Name PowerPlanInformation, PowerPlan, Win32_PowerPlan
 }
 
-function Get-PrinterInformation([string]$Computer) {
+function Get-PrinterInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Printer: http://msdn.microsoft.com/en-us/library/aa394363(VS.85).aspx
 
 	$PrinterInformation = @()
 	$Printer = $null
 
 	#$Win32_Printer = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer
-	$Win32_Printer = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer
+	
+Switch ($type){
+  'WMI' {$Win32_Printer = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer}
+  'CIM' {$Win32_Printer = GetCIMInstance -Namespace root\CIMV2 -Class Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer}
+}
 
 	$Win32_Printer | Sort-Object -Property Name | ForEach-Object {
 
@@ -2349,7 +2416,7 @@ function Get-PrinterInformation([string]$Computer) {
 	Remove-Variable -Name PrinterInformation, Printer, Win32_Printer
 }
 
-function Get-ProcessInformation([string]$Computer) {
+function Get-ProcessInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Process: http://msdn.microsoft.com/en-us/library/aa394372(VS.85).aspx
 
 	$ProcessInformation = @()
@@ -2359,7 +2426,11 @@ function Get-ProcessInformation([string]$Computer) {
 	$OwnerDomain = $null
 
 	#$Win32_Process = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Process -ComputerName $Computer
-	$Win32_Process = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Process -ComputerName $Computer
+	
+Switch ($type){
+  'WMI' {$Win32_Process = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Process -ComputerName $Computer}
+  'CIM' {$Win32_Process = Get-CImInstance -Namespace root\CIMV2 -Class Win32_Process -ComputerName $Computer}
+}
 
 	$Win32_Process | ForEach-Object {
 
@@ -2397,7 +2468,7 @@ function Get-ProcessInformation([string]$Computer) {
 	Remove-Variable -Name ProcessInformation, Process, ProcessOwner, OwnerUser, OwnerDomain, Win32_Process
 }
 
-function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion) {
+function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_QuickFixEngineering: http://msdn.microsoft.com/en-us/library/aa394391(VS.85).aspx
 	# Win32_Processor: http://msdn.microsoft.com/en-us/library/aa394373(VS.85).aspx
 
@@ -2418,7 +2489,11 @@ function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion)
 		$OSVersion.CompareTo($WindowsVista) -ge 0 -or
 		(
 			$OSVersion.CompareTo($WindowsServer2003) -ge 0 -and
-			$(@(Get-WMIObject -Namespace root\CIMV2 -Class Win32_QuickFixEngineering -ComputerName $Computer | Where-Object { $_.HotFixID -like 'KB932370*' }).Count -gt 0)
+			$(@(Switch ($type){
+  'WMI' {Get-WMIObject -Namespace root\CIMV2 -Class Win32_QuickFixEngineering -ComputerName $Computer | Where-Object { $_.HotFixID -like 'KB932370*' }}
+  'CIM' {Get-CIMINstance -Namespace root\CIMV2 -Class Win32_QuickFixEngineering -ComputerName $Computer | Where-Object { $_.HotFixID -like 'KB932370*' }}
+}
+).Count -gt 0)
 			#$(@(Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_QuickFixEngineering -ComputerName $Computer | Where-Object { $_.HotFixID -like 'KB932370*' }).Count -gt 0)
 		)
 	) {
@@ -2426,10 +2501,17 @@ function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion)
 		# Windows Vista, Windows 2008, and higher provides L3 cache size and speed
 		if ($OSVersion.CompareTo($WindowsVista) -ge 0) {
 			#$Win32_Processor = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer
-			$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer
+			Switch ($type){
+  'WMI' {$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+  'CIM' {$Win32_Processor = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, L3CacheSize, L3CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+}
 		} else {
 			#$Win32_Processor = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer
-			$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer
+			
+Switch ($type){
+  'WMI' {$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+  'CIM' {$Win32_Processor = Get-CIMinstance -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+}
 		}
 
 		# In a multi-socket system all processors have to be the same so we can just inspect the first one for details
@@ -2453,7 +2535,10 @@ function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion)
 	} else {
 
 		#$Win32_Processor = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, MaxClockSpeed, SocketDesignation -ComputerName $Computer
-		$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, MaxClockSpeed, SocketDesignation -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_Processor = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+  'CIM' {$Win32_Processor = Get-CImInstance -Namespace root\CIMV2 -Class Win32_Processor -Property DataWidth, Description, ExtClock, Family, L2CacheSize, L2CacheSpeed, Manufacturer, MaxClockSpeed, Name, MaxClockSpeed, SocketDesignation -ComputerName $Computer}
+}
 
 		# In a multi-socket system all processors have to be the same so we can just inspect the first one for details
 		$Proc = @($Win32_Processor)[0]
@@ -2498,7 +2583,7 @@ function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion)
 
 }
 
-function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$OSVersion) {
+function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Product: http://msdn.microsoft.com/en-us/library/aa394378(VS.85).aspx
 
 	$ApplicationInformation = @()
@@ -2510,15 +2595,25 @@ function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$O
 		# Starting with Windows XP use InstallDate2 to get the correct install date
 		if ($OSVersion.CompareTo($WindowsVista) -ge 0) {
 			#$Win32_Product = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2, HelpLink, URLInfoAbout, URLUpdateInfo -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
-			$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2, HelpLink, URLInfoAbout, URLUpdateInfo -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
+			Switch ($type){
+  'WMI' {$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2, HelpLink, URLInfoAbout, URLUpdateInfo -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+  'CIM' {$Win32_Product = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2, HelpLink, URLInfoAbout, URLUpdateInfo -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+}
 		} 
 		elseif ($OSVersion.CompareTo($WindowsXP) -ge 0) {
 			#$Win32_Product = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2 -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
-			$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2 -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
+			
+Switch ($type){
+  'WMI' {$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2 -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+  'CIM' {$Win32_Product = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate, InstallDate2 -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+}
 		} 
 		else {
 			#$Win32_Product = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
-			$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop
+			Switch ($type){
+  'WMI' {$Win32_Product = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+  'CIM' {$Win32_Product = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Product -Property Name, Vendor, Version, InstallLocation, InstallDate -Filter 'Name <> Null' -ComputerName $Computer -ErrorAction Stop}
+}
 		}
 	}
 	catch {
@@ -2574,13 +2669,16 @@ function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$O
 	Remove-Variable -Name ApplicationInformation, Application, InstallDateUTC, Win32_Product
 }
 
-function Get-RegistrySizeInformation([string]$Computer) {
+function Get-RegistrySizeInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Registry: http://msdn.microsoft.com/en-us/library/aa394394(VS.85).aspx
 
 	$RegistrySizeInformation = $null
 
 	#$Win32_Registry = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Registry -Property CurrentSize, MaximumSize -ComputerName $Computer
-	$Win32_Registry = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Registry -Property CurrentSize, MaximumSize -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_Registry = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Registry -Property CurrentSize, MaximumSize -ComputerName $Computer}
+  'CIM' {$Win32_Registry = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Registry -Property CurrentSize, MaximumSize -ComputerName $Computer}
+}
 
 	# This call should only bring back 1 row but just in case there are more we'll iterate through and make the last one the winner
 	$Win32_Registry | ForEach-Object {
@@ -2600,14 +2698,17 @@ function Get-RegistrySizeInformation([string]$Computer) {
 	Remove-Variable -Name RegistrySizeInformation, Win32_Registry
 }
 
-function Get-ServicesInformation([string]$Computer) {
+function Get-ServicesInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Service: http://msdn.microsoft.com/en-us/library/aa394418(VS.85).aspx
 
 	$ServicesInformation = @()
 	$Service = $null
 
 	#$Win32_Service = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Service -Property Caption, PathName, Started, StartMode, StartName -Filter "ServiceType ='Share Process' Or ServiceType ='Own Process'" -ComputerName $Computer
-	$Win32_Service = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Service -Property Caption, PathName, Started, StartMode, StartName -Filter "ServiceType ='Share Process' Or ServiceType ='Own Process'" -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_Service = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Service -Property Caption, PathName, Started, StartMode, StartName -Filter "ServiceType ='Share Process' Or ServiceType ='Own Process'" -ComputerName $Computer}
+  'CIM' {$Win32_Service = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Service -Property Caption, PathName, Started, StartMode, StartName -Filter "ServiceType ='Share Process' Or ServiceType ='Own Process'" -ComputerName $Computer}
+}
 
 	$Win32_Service | Sort-Object -Property Caption | ForEach-Object {
 
@@ -2635,14 +2736,17 @@ function Get-ServicesInformation([string]$Computer) {
 	Remove-Variable -Name ServicesInformation, Service, Win32_Service
 }
 
-function Get-ShareInformation([string]$Computer) {
+function Get-ShareInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_Share: http://msdn.microsoft.com/en-us/library/aa394435(VS.85).aspx
 
 	$ShareInformation = @()
 	$Share = $null
 
 	#$Win32_Share = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Share -Property Name, Description, Path, Type -ComputerName $Computer
-	$Win32_Share = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Share -Property Name, Description, Path, Type -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_Share = Get-WMIObject -Namespace root\CIMV2 -Class Win32_Share -Property Name, Description, Path, Type -ComputerName $Computer}
+  'CIM' {$Win32_Share = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Share -Property Name, Description, Path, Type -ComputerName $Computer}
+}
 
 	$Win32_Share | Sort-Object -Property Name | ForEach-Object {
 
@@ -2672,14 +2776,17 @@ function Get-ShareInformation([string]$Computer) {
 	Remove-Variable -Name ShareInformation, Share, Win32_Share
 }
 
-function Get-SoundDeviceInformation([string]$Computer) {
+function Get-SoundDeviceInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_SoundDevice: http://msdn.microsoft.com/en-us/library/aa394463(VS.85).aspx
 
 	$SoundDeviceInformation = @()
 	$SoundDevice = $null
 
 	#$Win32_SoundDevice = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_SoundDevice -Property Name, Manufacturer -ComputerName $Computer
-	$Win32_SoundDevice = Get-WMIObject -Namespace root\CIMV2 -Class Win32_SoundDevice -Property Name, Manufacturer -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_SoundDevice = Get-WMIObject -Namespace root\CIMV2 -Class Win32_SoundDevice -Property Name, Manufacturer -ComputerName $Computer}
+  'CIM' {$Win32_SoundDevice = Get-CimInstance -Namespace root\CIMV2 -Class Win32_SoundDevice -Property Name, Manufacturer -ComputerName $Computer}
+}
 
 	$Win32_SoundDevice | ForEach-Object {
 
@@ -2700,14 +2807,17 @@ function Get-SoundDeviceInformation([string]$Computer) {
 	Remove-Variable -Name SoundDeviceInformation, SoundDevice, Win32_SoundDevice
 }
 
-function Get-StartupCommandInformation([string]$Computer) {
+function Get-StartupCommandInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_StartupCommand: http://msdn.microsoft.com/en-us/library/aa394464(VS.85).aspx
 
 	$StartupCommandInformation = @()
 	$StartupCommand = $null
 
 	#$Win32_StartupCommand = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_StartupCommand -Property Command, Name, User -ComputerName $Computer
-	$Win32_StartupCommand = Get-WMIObject -Namespace root\CIMV2 -Class Win32_StartupCommand -Property Command, Name, User -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_StartupCommand = Get-WMIObject -Namespace root\CIMV2 -Class Win32_StartupCommand -Property Command, Name, User -ComputerName $Computer}
+  'CIM' {$Win32_StartupCommand = Get-CImInstance -Namespace root\CIMV2 -Class Win32_StartupCommand -Property Command, Name, User -ComputerName $Computer}
+}
 
 	$Win32_StartupCommand | Sort-Object -Property User, Name | ForEach-Object {
 
@@ -2729,9 +2839,12 @@ function Get-StartupCommandInformation([string]$Computer) {
 	Remove-Variable -Name StartupCommandInformation, StartupCommand, Win32_StartupCommand
 }
 
-function Test-ServiceInstallState([string]$Computer, [string]$ServiceName) {
+function Test-ServiceInstallState([string]$Computer, [string]$ServiceName, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	#if (@(Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Service -Filter "name='$ServiceName'" -ComputerName $Computer -ErrorAction SilentlyContinue).Count -gt 0) {
-	if (@(Get-WMIObject -Namespace root\CIMV2 -Class Win32_Service -Filter "name='$ServiceName'" -ComputerName $Computer -ErrorAction SilentlyContinue).Count -gt 0) {
+	if (@(Switch ($type){
+  'WMI' {Get-WMIObject -Namespace root\CIMV2 -Class Win32_Service -Filter "name='$ServiceName'" -ComputerName $Computer -ErrorAction SilentlyContinue}
+  'CIM' {Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Service -Filter "name='$ServiceName'" -ComputerName $Computer -ErrorAction SilentlyContinue}
+}).Count -gt 0) {
 		Write-Output $true
 	} else {
 		Write-Output $false
@@ -2739,13 +2852,16 @@ function Test-ServiceInstallState([string]$Computer, [string]$ServiceName) {
 }
 
 # This is one that we can get more info from - but how useful?
-function Get-SystemEnclosureInformation([string]$Computer) {
+function Get-SystemEnclosureInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_SystemEnclosure: http://msdn.microsoft.com/en-us/library/aa394474(VS.85).aspx
 
 	$SystemEnclosureInformation = $null
 
 	#$Win32_SystemEnclosure = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_SystemEnclosure -Property ChassisTypes -ComputerName $Computer
-	$Win32_SystemEnclosure = Get-WMIObject -Namespace root\CIMV2 -Class Win32_SystemEnclosure -Property ChassisTypes -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_SystemEnclosure = Get-WMIObject -Namespace root\CIMV2 -Class Win32_SystemEnclosure -Property ChassisTypes -ComputerName $Computer}
+  'CIM' {$Win32_SystemEnclosure = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_SystemEnclosure -Property ChassisTypes -ComputerName $Computer}
+}
 
 	$Win32_SystemEnclosure | ForEach-Object {
 		$SystemEnclosureInformation = New-Object -TypeName psobject -Property @{
@@ -2763,14 +2879,17 @@ function Get-SystemEnclosureInformation([string]$Computer) {
 
 }
 
-function Get-TapeDriveInformation([string]$Computer) {
+function Get-TapeDriveInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_TapeDrive: http://msdn.microsoft.com/en-us/library/aa394491(VS.85).aspx
 
 	$TapeDriveInformation = @()
 	$TapeDrive = $null
 
 	#$Win32_TapeDrive = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_TapeDrive -Property Name, Description, Manufacturer -ComputerName $Computer
-	$Win32_TapeDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_TapeDrive -Property Name, Description, Manufacturer -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_TapeDrive = Get-WMIObject -Namespace root\CIMV2 -Class Win32_TapeDrive -Property Name, Description, Manufacturer -ComputerName $Computer}
+  'CIM' {$Win32_TapeDrive = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_TapeDrive -Property Name, Description, Manufacturer -ComputerName $Computer}
+}
 
 	# Not sure why but this is bringing back one empty row on my laptop so I added where-object to filter out the empty row
 	$Win32_TapeDrive | Where-Object {$_.Name} | Sort-Object -Property Name | ForEach-Object {
@@ -2793,13 +2912,16 @@ function Get-TapeDriveInformation([string]$Computer) {
 	Remove-Variable -Name TapeDriveInformation, TapeDrive, Win32_TapeDrive
 }
 
-function Get-TimeZoneInformation([string]$Computer) {
+function Get-TimeZoneInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_TimeZone: http://msdn.microsoft.com/en-us/library/aa394498(VS.85).aspx
 
 	$TimeZoneInformation = $null
 
 	#$Win32_TimeZone = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_TimeZone -Property Description -ComputerName $Computer
-	$Win32_TimeZone = Get-WMIObject -Namespace root\CIMV2 -Class Win32_TimeZone -Property Description -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_TimeZone = Get-WMIObject -Namespace root\CIMV2 -Class Win32_TimeZone -Property Description -ComputerName $Computer}
+  'CIM' {$Win32_TimeZone = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_TimeZone -Property Description -ComputerName $Computer}
+}
 
 	$Win32_TimeZone | ForEach-Object {
 		$TimeZoneInformation = New-Object -TypeName psobject -Property @{
@@ -2816,14 +2938,14 @@ function Get-TimeZoneInformation([string]$Computer) {
 	Remove-Variable -Name TimeZoneInformation, Win32_TimeZone
 }
 
-function Get-PatchInformationFromWMI([string]$Computer) {
+function Get-PatchInformationFromWMI([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Using Get-Hotfix instead of Win32_QuickFixEngineering because it takes care of date formatting
 	# Win32_QuickFixEngineering: http://msdn.microsoft.com/en-us/library/aa394391(VS.85).aspx
 
 	$PatchInformation = @()
 	$Patch = $null
 
-	$HotFix = Get-HotFix -ComputerName $Computer
+	$HotFix = Get-HotFix -ComputerName $Computer -Type $Type
 
 	# Don't include patches that look like {ABC0D0F6-019E-4AC3-AD46-9C044E7B19F3}
 	$HotFix | Where-Object { (-not (($_.HotFixID.Length -eq 38) -and ($_.HotFixID.StartsWith('{')) -and ($_.HotFixID.EndsWith('}')))) } | ForEach-Object {
@@ -2849,7 +2971,7 @@ function Get-PatchInformationFromWMI([string]$Computer) {
 	Remove-Variable -Name PatchInformation, Patch, HotFix
 }
 
-function Get-UserAccountInformation([string]$Computer, [System.Version]$OSVersion) {
+function Get-UserAccountInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_UserAccount: http://msdn.microsoft.com/en-us/library/aa394507(VS.85).aspx
 
 	$UserAccountInformation = @()
@@ -2858,10 +2980,16 @@ function Get-UserAccountInformation([string]$Computer, [System.Version]$OSVersio
 	# Windows 2000 doesn't have the LocalAccount property
 	if ($OSVersion.CompareTo($WindowsXP) -ge 0) {
 		#$Win32_UserAccount = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter 'LocalAccount = True' -ComputerName $Computer
-		$Win32_UserAccount = Get-WMIObject -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter 'LocalAccount = True' -ComputerName $Computer
+Switch ($type){
+  'WMI' {$Win32_UserAccount = Get-WMIObject -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter 'LocalAccount = True' -ComputerName $Computer}
+  'CIM' {$Win32_UserAccount = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter 'LocalAccount = True' -ComputerName $Computer}
+}
 	} else {
 		#$Win32_UserAccount = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter '__SERVER = Domain' -ComputerName $Computer
-		$Win32_UserAccount = Get-WMIObject -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter '__SERVER = Domain' -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$Win32_UserAccount = Get-WMIObject -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter '__SERVER = Domain' -ComputerName $Computer}
+  'CIM' {$Win32_UserAccount = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_UserAccount -Property Description, Name, Disabled, FullName, Lockout, PasswordChangeable, PasswordExpires, PasswordRequired, PasswordRequired -Filter '__SERVER = Domain' -ComputerName $Computer}
+}
 	}
 
 	$Win32_UserAccount | ForEach-Object {
@@ -2889,14 +3017,17 @@ function Get-UserAccountInformation([string]$Computer, [System.Version]$OSVersio
 	Remove-Variable -Name UserAccountInformation, UserAccount, Win32_UserAccount
 }
 
-function Get-VideoControllerInformation([string]$Computer) {
+function Get-VideoControllerInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_VideoController: http://msdn.microsoft.com/en-us/library/aa394512(VS.85).aspx
 
 	$VideoControllerInformation = @()
 	$VideoController = $null
 
 	#$Win32_VideoController = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_VideoController -Property AdapterCompatibility, AdapterRAM, Name -ComputerName $Computer
-	$Win32_VideoController = Get-WMIObject -Namespace root\CIMV2 -Class Win32_VideoController -Property AdapterCompatibility, AdapterRAM, Name -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_VideoController = Get-WMIObject -Namespace root\CIMV2 -Class Win32_VideoController -Property AdapterCompatibility, AdapterRAM, Name -ComputerName $Computer}
+  'CIM' {$Win32_VideoController = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_VideoController -Property AdapterCompatibility, AdapterRAM, Name -ComputerName $Computer}
+}
 
 	$Win32_VideoController | ForEach-Object {
 
@@ -2919,7 +3050,7 @@ function Get-VideoControllerInformation([string]$Computer) {
 }
 
 # Not fully implemented yet
-function Get-ServerFeatureInformation([string]$Computer) {
+function Get-ServerFeatureInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_ServerFeature: http://msdn.microsoft.com/en-us/library/cc280268(VS.85).aspx
 
 	Write-WindowsMachineInformationLog -Message "[$Computer] Gathering information about Server Features" -MessageLevel Verbose
@@ -2928,7 +3059,10 @@ function Get-ServerFeatureInformation([string]$Computer) {
 	#	$ServerFeatureGuid = $null
 
 	#$Win32_ServerFeature = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_ServerFeature -Property ID, Name, ParentID -ComputerName $Computer
-	$Win32_ServerFeature = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ServerFeature -Property ID, Name, ParentID -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_ServerFeature = Get-WMIObject -Namespace root\CIMV2 -Class Win32_ServerFeature -Property ID, Name, ParentID -ComputerName $Computer}
+  'CIM' {$Win32_ServerFeature = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ServerFeature -Property ID, Name, ParentID -ComputerName $Computer}
+}
 
 
 	# Roles
@@ -2995,7 +3129,7 @@ function Get-ServerFeatureInformation([string]$Computer) {
 }
 
 
-function Get-OptionalFeatureInformation([string]$Computer) {
+function Get-OptionalFeatureInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Win32_OptionalFeature: http://msdn.microsoft.com/en-us/library/ee309383(v=VS.85).aspx
 	# Minimum supported server: Windows Server 2008 R2
 	# Minimum supported client: Windows 7
@@ -3007,7 +3141,10 @@ function Get-OptionalFeatureInformation([string]$Computer) {
 	Write-WindowsMachineInformationLog -Message "[$Computer] Gathering information about Optional Features" -MessageLevel Verbose
 
 	#$Win32_OptionalFeature = Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_OptionalFeature -Property Caption, Name, InstallState -ComputerName $Computer
-	$Win32_OptionalFeature = Get-WMIObject -Namespace root\CIMV2 -Class Win32_OptionalFeature -Property Caption, Name, InstallState -ComputerName $Computer
+	Switch ($type){
+  'WMI' {$Win32_OptionalFeature = Get-WMIObject -Namespace root\CIMV2 -Class Win32_OptionalFeature -Property Caption, Name, InstallState -ComputerName $Computer}
+  'CIM' {$Win32_OptionalFeature = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_OptionalFeature -Property Caption, Name, InstallState -ComputerName $Computer}
+}
 
 	$Win32_OptionalFeature | ForEach-Object {
 
@@ -3041,7 +3178,7 @@ function Get-OptionalFeatureInformation([string]$Computer) {
 
 ## IIS Functions
 
-function Get-IIS6WebInformation([string]$Computer) {
+function Get-IIS6WebInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# IISWebServerSetting: http://msdn.microsoft.com/en-us/library/ms524332.aspx
 	# IISWebVirtualDirSetting: http://msdn.microsoft.com/en-us/library/ms525005(VS.90).aspx
 
@@ -3061,7 +3198,10 @@ function Get-IIS6WebInformation([string]$Computer) {
 
 	try {
 		#$IISWebServer = Get-WMIObjectWithTimeout -Namespace root\MicrosoftIISv2 -Class IISWebServer -Authentication PacketPrivacy -ComputerName $Computer
-		$IISWebServer = Get-WMIObject -Namespace root\MicrosoftIISv2 -Class IISWebServer -Authentication PacketPrivacy -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$IISWebServer = Get-WMIObject -Namespace root\MicrosoftIISv2 -Class IISWebServer -Authentication PacketPrivacy -ComputerName $Computer}
+  'CIM' {$IISWebServer = Get-WMIObject -Namespace root\MicrosoftIISv2 -Class IISWebServer -Authentication PacketPrivacy -ComputerName $Computer}
+}
 	}
 	catch {
 		Write-WindowsMachineInformationLog -Message "`t[$Computer] Unable to gather information about IIS: Check that IISWebServer class is installed" -MessageLevel Warning
@@ -3154,7 +3294,7 @@ function Get-IIS6WebInformation([string]$Computer) {
 
 }
 
-function Get-IIS7WebInformation([string]$Computer) {
+function Get-IIS7WebInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type='WMI') {
 	# Significant architectural changes in IIS 7
 	# IIS 7 WMI provider: http://msdn.microsoft.com/en-us/library/Aa347459
 	# See:
@@ -3182,7 +3322,10 @@ function Get-IIS7WebInformation([string]$Computer) {
 
 	try {
 		#$IIS7Site = Get-WMIObjectWithTimeout -Namespace root\WebAdministration -Class Site -Property Name, Bindings -Authentication PacketPrivacy -ComputerName $Computer
-		$IIS7Site = Get-WMIObject -Namespace root\WebAdministration -Class Site -Property Name, Bindings -Authentication PacketPrivacy -ComputerName $Computer
+		Switch ($type){
+  'WMI' {$IIS7Site = Get-WMIObject -Namespace root\WebAdministration -Class Site -Property Name, Bindings -Authentication PacketPrivacy -ComputerName $Computer}
+  'CIM' {$IIS7Site = Get-CIMInstance -Namespace root\WebAdministration -Class Site -Property Name, Bindings -Authentication PacketPrivacy -ComputerName $Computer}
+}
 	}
 	catch {
 		Write-WindowsMachineInformationLog -Message "`t[$Computer] Unable to gather IIS information: Check that Site class is installed" -MessageLevel Warning
@@ -3216,7 +3359,7 @@ function Get-IIS7WebInformation([string]$Computer) {
 		Write-WindowsMachineInformationLog -MessageLevel Debug -Message "`t`t`tServerComment: $($Setting.ServerComment)"
 		Write-WindowsMachineInformationLog -MessageLevel Debug -Message "`t`t`tBindings:"
 
-		$_.Bindings | where {$_.Protocol -ieq 'http'} | ForEach-Object {
+		$_.Bindings | Where-Object {$_.Protocol -ieq 'http'} | ForEach-Object {
 
 			$BindingInfo = $($_.BindingInformation).Split(':')
 
@@ -3670,11 +3813,11 @@ function Write-WindowsMachineInformationLog {
 }
 
 
-function Get-IISInformation([string]$Computer, [System.Version]$OSVersion){
+function Get-IISInformation([string]$Computer, [System.Version]$OSVersion, [ValidateSet('CIM','WMI')][String]$Type='WMI'){
 	if ($OSVersion.CompareTo($WindowsVista) -ge 0) { 
-		Get-IIS7WebInformation -Computer $Computer 
+		Get-IIS7WebInformation -Computer $Computer -Type $Type
 	} else { 
-		Get-IIS6WebInformation -Computer $Computer 
+		Get-IIS6WebInformation -Computer $Computer -Type $Type
 	}
 }
 
@@ -3767,7 +3910,8 @@ function Get-WindowsMachineInformation {
 		[Parameter(Mandatory=$false)] 
 		[alias('errors')]
 		[int]
-		$StopAtErrorCount = 3
+		$StopAtErrorCount = 3,
+    [ValidateSet('CIM','WMI')][String]$Type='WMI'
 	)
 	process {
 
@@ -3852,7 +3996,7 @@ function Get-WindowsMachineInformation {
 			while (-not $MachineInformation.OperatingSystem.Settings.ComputerSystem.Name) {
 				try {
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering computer system information" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Settings.ComputerSystem = Get-SystemInformation -Computer $ComputerName
+					$MachineInformation.OperatingSystem.Settings.ComputerSystem = Get-SystemInformation -Computer $ComputerName -Type $type
 				} 
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -3866,7 +4010,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering computer system product information" -MessageLevel Verbose
-				$MachineInformation.OperatingSystem.Settings.ComputerSystemProduct = Get-ComputerSystemProductInformation -Computer $ComputerName
+				$MachineInformation.OperatingSystem.Settings.ComputerSystemProduct = Get-ComputerSystemProductInformation -Computer $ComputerName -Type $type
 			}
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3879,7 +4023,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering OS information" -MessageLevel Verbose
-				$MachineInformation.OperatingSystem.Settings.OperatingSystem = Get-OSInfo -Computer $ComputerName
+				$MachineInformation.OperatingSystem.Settings.OperatingSystem = Get-OSInfo -Computer $ComputerName -Type $type
 				$OSVersion = [System.Version]$MachineInformation.OperatingSystem.Settings.OperatingSystem.Version
 			} 
 			catch {
@@ -3893,7 +4037,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering time zone" -MessageLevel Verbose
-				$MachineInformation.OperatingSystem.Desktop.TimeZone = Get-TimeZoneInformation -Computer $ComputerName 
+				$MachineInformation.OperatingSystem.Desktop.TimeZone = Get-TimeZoneInformation -Computer $ComputerName  -Type $type
 			} 
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3906,7 +4050,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering pagefile information" -MessageLevel Verbose
-				$MachineInformation.OperatingSystem.PageFile = Get-PagefileInformation -Computer $ComputerName -OSVersion $OSVersion 
+				$MachineInformation.OperatingSystem.PageFile = Get-PagefileInformation -Computer $ComputerName -OSVersion $OSVersion  -Type $type
 			} 
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3919,7 +4063,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering network adapter configuration" -MessageLevel Verbose
-				$MachineInformation.Hardware.NetworkAdapter = Get-NetworkAdapterConfig -Computer $ComputerName 
+				$MachineInformation.Hardware.NetworkAdapter = Get-NetworkAdapterConfig -Computer $ComputerName  -Type $type
 			} 
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3932,7 +4076,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about physical memory" -MessageLevel Verbose
-				$MachineInformation.Hardware.MotherboardControllerAndPort.PhysicalMemory = Get-PhysicalMemoryInformation -Computer $ComputerName 
+				$MachineInformation.Hardware.MotherboardControllerAndPort.PhysicalMemory = Get-PhysicalMemoryInformation -Computer $ComputerName  -Type $type
 			}
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3945,7 +4089,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering processor information" -MessageLevel Verbose
-				$MachineInformation.Hardware.MotherboardControllerAndPort.Processor = Get-ProcessorInformation -Computer $ComputerName -OSVersion $OSVersion
+				$MachineInformation.Hardware.MotherboardControllerAndPort.Processor = Get-ProcessorInformation -Computer $ComputerName -OSVersion $OSVersion -Type $type
 			}
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3958,7 +4102,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering system enclosure information" -MessageLevel Verbose
-				$MachineInformation.Hardware.MotherboardControllerAndPort.SystemEnclosure = Get-SystemEnclosureInformation -Computer $ComputerName
+				$MachineInformation.Hardware.MotherboardControllerAndPort.SystemEnclosure = Get-SystemEnclosureInformation -Computer $ComputerName -Type $type
 			}
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3971,7 +4115,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering CD-ROM Information" -MessageLevel Verbose
-				$MachineInformation.Hardware.Storage.CDROMDrive = Get-CDROMInformation -Computer $ComputerName 
+				$MachineInformation.Hardware.Storage.CDROMDrive = Get-CDROMInformation -Computer $ComputerName  -Type $type
 			} 
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -3984,7 +4128,7 @@ function Get-WindowsMachineInformation {
 			#region
 			try { 
 				Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering disk information" -MessageLevel Verbose
-				$MachineInformation.Hardware.Storage.DiskDrive = Get-DiskInformation -Computer $ComputerName -OSVersion $OSVersion
+				$MachineInformation.Hardware.Storage.DiskDrive = Get-DiskInformation -Computer $ComputerName -OSVersion $OSVersion -Type $type
 			}
 			catch {
 				$ErrorRecord = $_.Exception.ErrorRecord
@@ -4009,7 +4153,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'BIOS') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering BIOS information" -MessageLevel Verbose
-					$MachineInformation.Hardware.MotherboardControllerAndPort.BIOS = Get-BIOSInfo -Computer $ComputerName 
+					$MachineInformation.Hardware.MotherboardControllerAndPort.BIOS = Get-BIOSInfo -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4024,7 +4168,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'LocalGroups') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering local groups and group members" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Users.LocalGroups = Get-LocalGroupsInformation -Computer $ComputerName -OSVersion $OSVersion
+					$MachineInformation.OperatingSystem.Users.LocalGroups = Get-LocalGroupsInformation -Computer $ComputerName -OSVersion $OSVersion -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4039,7 +4183,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'LocalUserAccounts') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering local users" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Users.LocalUsers = Get-UserAccountInformation -Computer $ComputerName -OSVersion $OSVersion
+					$MachineInformation.OperatingSystem.Users.LocalUsers = Get-UserAccountInformation -Computer $ComputerName -OSVersion $OSVersion -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4054,7 +4198,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'DesktopSessions') { 
 				try {
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about logged on users" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Users.DesktopSessions = Get-DesktopSessionInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Users.DesktopSessions = Get-DesktopSessionInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4076,7 +4220,7 @@ function Get-WindowsMachineInformation {
 			) { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering IPv4 Route information" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Network.IPV4RouteTable = Get-IpRouteInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Network.IPV4RouteTable = Get-IpRouteInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4091,7 +4235,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'EventLog') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering event log settings" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.EventLog = Get-EventLogSettings -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.EventLog = Get-EventLogSettings -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4110,7 +4254,7 @@ function Get-WindowsMachineInformation {
 			) { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about power plans" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Settings.PowerPlan = Get-PowerPlanInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Settings.PowerPlan = Get-PowerPlanInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4125,7 +4269,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'Printers') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering printer information" -MessageLevel Verbose
-					$MachineInformation.Hardware.Printer = Get-PrinterInformation -Computer $ComputerName 
+					$MachineInformation.Hardware.Printer = Get-PrinterInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4140,7 +4284,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'Processes') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering process information" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.RunningProcesses = Get-ProcessInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.RunningProcesses = Get-ProcessInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4155,7 +4299,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'RegistrySize') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering registry size information" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Registry = Get-RegistrySizeInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Registry = Get-RegistrySizeInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4170,7 +4314,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'Services') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about services" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Services = Get-ServicesInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Services = Get-ServicesInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4185,7 +4329,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'Shares') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about shares" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Shares = Get-ShareInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Shares = Get-ShareInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4201,7 +4345,7 @@ function Get-WindowsMachineInformation {
 				#region
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering Sound Device information" -MessageLevel Verbose
-					$MachineInformation.Hardware.MotherboardControllerAndPort.SoundDevice = Get-SoundDeviceInformation -Computer $ComputerName 
+					$MachineInformation.Hardware.MotherboardControllerAndPort.SoundDevice = Get-SoundDeviceInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4214,7 +4358,7 @@ function Get-WindowsMachineInformation {
 				#region
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering TapeDrive information" -MessageLevel Verbose
-					$MachineInformation.Hardware.Storage.TapeDrive = Get-TapeDriveInformation -Computer $ComputerName 
+					$MachineInformation.Hardware.Storage.TapeDrive = Get-TapeDriveInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4227,7 +4371,7 @@ function Get-WindowsMachineInformation {
 				#region
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering Video Controller information" -MessageLevel Verbose
-					$MachineInformation.Hardware.VideoAndMonitor.VideoController = Get-VideoControllerInformation -Computer $ComputerName 
+					$MachineInformation.Hardware.VideoAndMonitor.VideoController = Get-VideoControllerInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4243,7 +4387,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'StartupCommands') { 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering Startup Commands information" -MessageLevel Verbose
-					$MachineInformation.OperatingSystem.Settings.StartupCommands = Get-StartupCommandInformation -Computer $ComputerName 
+					$MachineInformation.OperatingSystem.Settings.StartupCommands = Get-StartupCommandInformation -Computer $ComputerName  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4260,7 +4404,10 @@ function Get-WindowsMachineInformation {
 
 			# Instead, it has to be called via query
 			# For info on using this WMI class see http://msdn.microsoft.com/en-us/library/windows/desktop/aa393664(v=vs.85).aspx
-			$StdRegProv = Get-WmiObject -Namespace root\DEFAULT -Query "select * FROM meta_class WHERE __Class = 'StdRegProv'" -ComputerName $ComputerName
+      Switch ($type){
+        CIM {$StdRegProv='StdRegProv'}
+        WMI {$StdRegProv = Get-WmiObject -Namespace root\DEFAULT -Query "select * FROM meta_class WHERE __Class = 'StdRegProv'" -ComputerName $ComputerName}
+      }			
 
 
 			# Get-ApplicationInformation
@@ -4268,7 +4415,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'InstalledApplications') {
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering application information from WMI" -MessageLevel Verbose
-					$MachineInformation.Software.InstalledApplications += Get-ApplicationInformationFromWMI -Computer $ComputerName -OSVersion $OSVersion
+					$MachineInformation.Software.InstalledApplications += Get-ApplicationInformationFromWMI -Computer $ComputerName -OSVersion $OSVersion  -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4294,7 +4441,7 @@ function Get-WindowsMachineInformation {
 			if ($AdditionalData -icontains 'InstalledPatches') { 
 				try {
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about patches from WMI" -MessageLevel Verbose
-					$MachineInformation.Software.Patches = Get-PatchInformationFromWMI -Computer $ComputerName 
+					$MachineInformation.Software.Patches = Get-PatchInformationFromWMI -Computer $ComputerName   -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
@@ -4304,7 +4451,7 @@ function Get-WindowsMachineInformation {
 
 				try { 
 					Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about patches from registry" -MessageLevel Verbose
-					$MachineInformation.Software.Patches += Get-PatchInformationFromRegistry -RegistryProvider $StdRegProv 
+					$MachineInformation.Software.Patches += Get-PatchInformationFromRegistry -RegistryProvider $StdRegProv   -Type $type
 				}
 				catch {
 					$ErrorRecord = $_.Exception.ErrorRecord
