@@ -974,7 +974,7 @@ function Find-IPv4Device {
 
 						# Double check that we've got a DNS Hostname. If not, get it from DNS
 						# If we do have a DNS Hostname that doesn't begin with the WMI Machine Name and $ResolveAliases is true, get the machine name from DNS
-						if (
+						<#if (
 							!$Device[$HashKey].DnsRecordName -or
 							(
 								$ResolveAliases -eq $true -and 
@@ -989,7 +989,7 @@ function Find-IPv4Device {
 								# Fallback to using the WMI machine name as the DNS host name in the event there's an error
 								$Device[$HashKey].DnsRecordName = $HostName
 							}
-						}
+						}#>
 					}
 					catch {}
 					finally {
@@ -1055,7 +1055,7 @@ function Find-IPv4Device {
 				[string]$DNSHostName,
 				[switch]$IncludeDomainName = $false
 			)
-            $Win32_ComputerSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Name -ComputerName $DNSHostName -ErrorAction Stop
+            $Win32_ComputerSystem = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_ComputerSystem -Property Name -ComputerName $DNSHostName -OperationTimeoutSec 5 -ErrorAction Stop
 			$ComputerName = $Win32_ComputerSystem.Name
 			Write-Output $ComputerName
 		}
@@ -1065,23 +1065,38 @@ function Find-IPv4Device {
 		$PingAliveDevice | ForEach-Object {
 
 			$ScanCount++
-
+      $CurrentDevice=($_.Value)
 			# Update progress
-			if ($($_.Value).DnsRecordName) {
-				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).DnsRecordName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+			if ($CurrentDevice.DnsRecordName) {
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $CurrentDevice.DnsRecordName) ($CurrentDevice.IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} elseif ($($_.Value).WmiMachineName) {
-				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).WmiMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $CurrentDevice.WmiMachineName) ($CurrentDevice.IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			} elseif ($($_.Value).WinRMMachineName) {
-				Write-NetworkScanLog -Message "Testing WINRM connectivity to $($($_.Value).WinRMMachineName) ($($($_.Value).IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to $CurrentDevice.WinRMMachineName) ($CurrentDevice.IPAddress)) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
             } else {
-				Write-NetworkScanLog -Message "Testing WINRM connectivity to IP address $($($_.Value).IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
+				Write-NetworkScanLog -Message "Testing WINRM connectivity to IP address $CurrentDevice.IPAddress) [$ScanCount of $DeviceCount]" -MessageLevel Verbose
 			}
 
 			# Test connectivity to the machine 
-
+						# Double check that we've got a DNS Hostname. If not, get it from DNS
+						# If we do have a DNS Hostname that doesn't begin with the WMI Machine Name and $ResolveAliases is true, get the machine name from DNS
+						if (
+							!$CurrentDevice.DnsRecordName -or ($CurrentDevice.DnsRecordName -eq $CurrentDevice.WMIMachineName)
+						) {
+							try {
+								Foreach ($row in $([System.Net.Dns]::GetHostByAddress($CurrentDevice.IPAddress))) {
+									$CurrentDevice.DnsRecordName = $row.HostName.ToUpper()
+								}
+							} catch {
+								# Exit current loop if DNS fails
+								$CurrentDevice.DnsRecordName = $null
+                                $CurrentDevice.IsWinRMAlive = $false
+                                return
+							}
+						}
 			#Create the PowerShell instance and supply the scriptblock with the other parameters
 			$PowerShell = [System.Management.Automation.PowerShell]::Create().AddScript($ScriptBlock)
-			$PowerShell = $PowerShell.AddArgument($($_.Value).DnsRecordName)
+			$PowerShell = $PowerShell.AddArgument($CurrentDevice.DnsRecordName)
 
 			#Add the runspace into the PowerShell instance
 			$PowerShell.RunspacePool = $RunspacePool
@@ -1114,26 +1129,6 @@ function Find-IPv4Device {
 
 						$Device[$HashKey].WinRMMachineName = $HostName # This is where the output gets returned
 						$Device[$HashKey].IsWinRMAlive = $true
-
-
-						# Double check that we've got a DNS Hostname. If not, get it from DNS
-						# If we do have a DNS Hostname that doesn't begin with the WMI Machine Name and $ResolveAliases is true, get the machine name from DNS
-						if (
-							!$Device[$HashKey].DnsRecordName -or
-							(
-								$ResolveAliases -eq $true -and 
-								$Device[$HashKey].DnsRecordName.StartsWith($HostName, 'CurrentCultureIgnoreCase') -ne $true
-							)
-						) {
-							try {
-								[System.Net.Dns]::GetHostByName($HostName) | ForEach-Object {
-									$Device[$HashKey].DnsRecordName = $_.HostName.ToUpper()
-								}
-							} catch {
-								# Fallback to using the WMI machine name as the DNS host name in the event there's an error
-								$Device[$HashKey].DnsRecordName = $HostName
-							}
-						}
 					}
 					catch { }
 					finally {
@@ -1170,7 +1165,7 @@ function Find-IPv4Device {
 
 
 		# Count how many devices responded
-		$WinRMAliveDevice = @($Device.GetEnumerator() | Where-Object { $($_.Value).IsPingAlive -eq $true })
+		$WinRMAliveDevice = @($Device.GetEnumerator() | Where-Object { $CurrentDevice.IsPingAlive -eq $true })
 		$DeviceCount = $($WinRMAliveDevice | Measure-Object).Count
 
 		Write-NetworkScanLog -Message 'WinRM connectivity test complete' -MessageLevel Verbose
