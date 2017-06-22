@@ -1236,6 +1236,9 @@ function Find-IPv4Device
           IF (-not ( $CurrentDevice.DnsRecordName -like '*.*')){ #If DNSRecordname not fqdn then throw
             throw ('DnsrecordName for {0} not a FQDN' -f $CurrentDevice.IPAddress)
           }
+           IF  (('^{0}' -f $Currentdevice.DNSRecordName) -match $ENV:COMPUTERNAME){ # if machine resovles to the current machine then set the dns name to localhost
+           $CurrentDevice.DnsRecordName = 'localhost'
+          }
         }
         catch 
         {
