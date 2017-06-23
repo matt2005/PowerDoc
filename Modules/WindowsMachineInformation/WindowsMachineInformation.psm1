@@ -2991,7 +2991,16 @@ function Get-OSInfo([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type =
     $OSInfo = New-Object -TypeName psobject -Property @{
       Name             = $_.Name.split('|')[0].Trim()
       ServicePack      = $_.CSDVersion
-      InstallDateUTC   = $Win32_OperatingSystem.ConvertToDateTime($_.InstallDate).ToUniversalTime()
+      InstallDateUTC   = Switch ($Type) {
+        'WMI' 
+        {
+          $Win32_OperatingSystem.ConvertToDateTime($_.InstallDate).ToUniversalTime()
+        }
+        'CIM' 
+        {
+          $Win32_OperatingSystem.InstallDate.ToUniversalTime()
+        }
+      }
       Language         = Get-OSLanguage -LanguageCode $_.OSLanguage
       Version          = $_.Version
       WindowsDirectory = $_.WindowsDirectory
@@ -3316,7 +3325,7 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion, [Val
 
     $Win32_DiskPartition |
     Where-Object -FilterScript {
-      $_.DeviceID 
+      $_.DeviceID
     } |
     ForEach-Object -Process {
       $Partition = New-Object -TypeName psobject -Property @{
@@ -3348,7 +3357,7 @@ function Get-DiskInformation([string]$Computer, [System.Version]$OSVersion, [Val
 
       $Win32_LogicalDisk |
       Where-Object -FilterScript {
-        $_.DeviceID 
+        $_.DeviceID
       } |
       ForEach-Object -Process {
         # Win32_Volume only supported in Windows Server 2003 and higher
@@ -3553,7 +3562,7 @@ function Get-IpRouteInformation([string]$Computer, [ValidateSet('CIM','WMI')][St
 }
 
 
-function Get-DesktopSessionInformation([string]$Computer) 
+function Get-DesktopSessionInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type = 'WMI') 
 {
   # Uses RDS-Manager module from http://gallery.technet.microsoft.com/ScriptCenter/e8c3af96-db10-45b0-88e3-328f087a8700/
   # Or, if RDS-Manager is not loaded, uses Win32_Process: http://msdn.microsoft.com/en-us/library/aa394372(VS.85).aspx
@@ -3576,11 +3585,11 @@ function Get-DesktopSessionInformation([string]$Computer)
           IdleTime     = $_.IdleTime
           LogonTimeUTC = if ($_.LogonTime) 
           {
-            (Get-Date -Date $_.LogonTime).ToUniversalTime() 
+            (Get-Date -Date $_.LogonTime).ToUniversalTime()
           }
           else 
           {
-            $null 
+            $null
           }
           ProtocolType = $_.ProtocolType
           Session      = $_.Session
@@ -3588,43 +3597,43 @@ function Get-DesktopSessionInformation([string]$Computer)
           State        = switch ($_.State) {
             $WTSConnectStateEnum::WTSActive 
             {
-              'Active' 
+              'Active'
             }
             $WTSConnectStateEnum::WTSConnected 
             {
-              'Connected' 
+              'Connected'
             }
             $WTSConnectStateEnum::WTSConnectQuery 
             {
-              'Connecting' 
+              'Connecting'
             }
             $WTSConnectStateEnum::WTSShadow 
             {
-              'Shadow' 
+              'Shadow'
             }
             $WTSConnectStateEnum::WTSDisconnected 
             {
-              'Disconnected' 
+              'Disconnected'
             }
             $WTSConnectStateEnum::WTSIdle 
             {
-              'Idle' 
+              'Idle'
             }
             $WTSConnectStateEnum::WTSListen 
             {
-              'Listening' 
+              'Listening'
             }
             $WTSConnectStateEnum::WTSReset 
             {
-              'Resetting' 
+              'Resetting'
             }
             $WTSConnectStateEnum::WTSDown 
             {
-              'Down Due To Error' 
+              'Down Due To Error'
             }
             $WTSConnectStateEnum::WTSInit 
             {
-              'Initializing' 
+              'Initializing'
             }
           }
           User         = $_.User
@@ -3651,18 +3660,46 @@ function Get-DesktopSessionInformation([string]$Computer)
   if ($RDSessionSuccess -ne $true) 
   {
     #Get-WMIObjectWithTimeout -Namespace root\CIMV2 -Class Win32_Process -Filter 'name="explorer.exe"' -ComputerName $Computer | ForEach-Object {
-    Get-WmiObject -Namespace root\CIMV2 -Class Win32_Process -Filter 'name="explorer.exe"' -ComputerName $Computer | ForEach-Object -Process {
+    Switch ($Type){
+      'WMI' 
+      {
+        $Win32_Process = Get-WmiObject -Namespace root\CIMV2 -Class Win32_Process -Filter 'name="explorer.exe"' -ComputerName $Computer
+      }
+      'CIM' 
+      {
+        $Win32_Process = Get-CimInstance -Namespace root\CIMV2 -ClassName Win32_Process -Filter 'name="explorer.exe"' -ComputerName $Computer
+        $GetOwner = {
+          process{
+            Invoke-CimMethod -InputObject $this -MethodName GetOwner
+          }
+        }
+
+        $Win32_Process | Add-Member -MemberType ScriptMethod -Name GetOwner -Value $GetOwner
+      }
+    }
+    $Win32_Process | ForEach-Object -Process {
+      $CreationDate = $_.CreationDate
+      switch ($Type) {
+        'WMI'
+        {
+          $CreationDate = $Win32_Process.ConvertToDateTime($CreationDate).ToUniversalTime()
+        }
+        'CIM'
+        {
+          $CreationDate = $CreationDate.ToUniversalTime()
+        }
+      }
       $Session = New-Object -TypeName psobject -Property @{
         Client       = $null
         Host         = $null
         IdleTime     = $null
-        LogonTimeUTC = $_.ConvertToDateTime($_.CreationDate).ToUniversalTime()
+        LogonTimeUTC = $CreationDate
         ProtocolType = $null
         Session      = $null
         SessionID    = $null
         State        = $null
         User         = $_.GetOwner() | ForEach-Object -Process {
-          [String]::Join('\', @($_.Domain, $_.User)) 
+          [String]::Join('\', @($_.Domain, $_.User))
         }
       }
 
@@ -4030,7 +4067,7 @@ function Get-PrinterInformation([string]$Computer, [ValidateSet('CIM','WMI')][St
     }
     'CIM' 
     {
-      $Win32_Printer = Get-CIMInstance -Namespace root\CIMV2 -Class Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer
+      $Win32_Printer = Get-CimInstance -Namespace root\CIMV2 -ClassName Win32_Printer -Property DriverName, Name, PortName -Filter 'ServerName = Null' -ComputerName $Computer
     }
   }
 
@@ -4145,13 +4182,13 @@ function Get-ProcessorInformation([string]$Computer, [System.Version]$OSVersion,
             'WMI' 
             {
               Get-WmiObject -Namespace root\CIMV2 -Class Win32_QuickFixEngineering -ComputerName $Computer | Where-Object -FilterScript {
-                $_.HotFixID -like 'KB932370*' 
+                $_.HotFixID -like 'KB932370*'
               }
             }
             'CIM' 
             {
               Get-CimInstance -Namespace root\CIMV2 -ClassName Win32_QuickFixEngineering -ComputerName $Computer | Where-Object -FilterScript {
-                $_.HotFixID -like 'KB932370*' 
+                $_.HotFixID -like 'KB932370*'
               }
             }
           }
@@ -4349,7 +4386,16 @@ function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$O
 
     if ($_.InstallDate2) 
     {
-      $InstallDateUTC = $_.ConvertToDateTime($_.InstallDate2).ToUniversalTime()
+      $InstallDateUTC = Switch ($Type) {
+        'WMI' 
+        {
+          $_.ConvertToDateTime($_.InstallDate2).ToUniversalTime()
+        }
+        'CIM' 
+        {
+          $_.InstallDate2.ToUniversalTime()
+        }
+      }
     }
     elseif ($_.InstallDate) 
     {
@@ -4357,6 +4403,10 @@ function Get-ApplicationInformationFromWMI([string]$Computer, [System.Version]$O
       if ($($_.InstallDate).Length -eq 8) 
       {
         $InstallDateUTC = $(Get-Date -Year $($_.InstallDate).Substring(0,4) -Month $($_.InstallDate).Substring(4,2) -Day $($_.InstallDate).Substring(6,2) -Hour 0 -Minute 0 -Second 0 )
+      }
+      ElseIF ($_.InstallDate.GetType().Name -eq 'DateTime')
+      {
+        $InstallDateUTC = $_.InstallDate.ToUniversalTime()
       }
       else 
       {
@@ -4477,7 +4527,38 @@ function Get-ServicesInformation([string]$Computer, [ValidateSet('CIM','WMI')][S
 
   Remove-Variable -Name ServicesInformation, Service, Win32_Service
 }
+function Get-ScheduledTaskInformation([string]$Computer) 
+{
+  $ScheduledTaskInformation = @()
+  $ScheduledTask = $null
+  $Win32_ScheduledJob = ((Get-ScheduledTask -CimSession (New-CimSession -ComputerName $ComputerName)) |
+    Where-Object -FilterScript {
+      $_.Author -inotlike 'Microsoft*' -and ($_.Author -inotlike '$(@%SystemRoot*') -and ($_.Author -inotlike 'System')
+    } |
+    Get-ScheduledTaskInfo |
+  Select-Object -Property TaskName, TaskPath, LastRunTime, NextRunTime)
+  Get-CimSession -ComputerName $ComputerName | Remove-CimSession
+  $Win32_ScheduledJob |
+  Sort-Object -Property TaskPath |
+  ForEach-Object -Process {
+    $ScheduledTask = New-Object -TypeName psobject -Property @{
+      TaskName    = $_.TaskName
+      TaskPath    = $_.TaskPath
+      LastRunTime = $_.LastRunTime
+      NextRunTime = $_.NextRunTime
+    }
 
+    $ScheduledTaskInformation += $ScheduledTask
+    Write-WindowsMachineInformationLog -MessageLevel Debug -Message "`tScheduleTask:"
+    $ScheduledTask.psobject.Properties |
+    ForEach-Object -Process {
+      Write-WindowsMachineInformationLog -MessageLevel Debug -Message "`t`t$($_.Name): $($_.Value)"
+    }
+  } 
+  Write-Output -InputObject $ScheduledTaskInformation
+
+  Remove-Variable -Name ScheduledTaskInformation, ScheduledTask, Win32_ScheduledJob
+}
 function Get-ShareInformation([string]$Computer, [ValidateSet('CIM','WMI')][String]$Type = 'WMI') 
 {
   # Win32_Share: http://msdn.microsoft.com/en-us/library/aa394435(VS.85).aspx
@@ -4746,12 +4827,12 @@ function Get-PatchInformationFromWMI([string]$Computer, [ValidateSet('CIM','WMI'
   $PatchInformation = @()
   $Patch = $null
 
-  $HotFix = Get-HotFix -ComputerName $Computer -Type $Type
+  $HotFix = Get-HotFix -ComputerName $Computer 
 
   # Don't include patches that look like {ABC0D0F6-019E-4AC3-AD46-9C044E7B19F3}
   $HotFix |
   Where-Object -FilterScript {
-    (-not (($_.HotFixID.Length -eq 38) -and ($_.HotFixID.StartsWith('{')) -and ($_.HotFixID.EndsWith('}')))) 
+    (-not (($_.HotFixID.Length -eq 38) -and ($_.HotFixID.StartsWith('{')) -and ($_.HotFixID.EndsWith('}'))))
   } |
   ForEach-Object -Process {
     $Patch = New-Object -TypeName psobject -Property @{
@@ -4761,11 +4842,11 @@ function Get-PatchInformationFromWMI([string]$Computer, [ValidateSet('CIM','WMI'
       InstalledBy    = $_.InstalledBy
       InstallDateUTC = if (($_.psbase.Properties['InstalledOn'].Value -ne [String]::Empty) -and ($_.InstalledOn -ne $null)) 
       {
-        $_.InstalledOn.ToUniversalTime() 
+        $_.InstalledOn.ToUniversalTime()
       }
       else 
       {
-        $null 
+        $null
       }
     }
 
@@ -4993,19 +5074,19 @@ function Get-OptionalFeatureInformation([string]$Computer, [ValidateSet('CIM','W
     $FeatureState = switch ($_.InstallState) {
       1 
       {
-        'Enabled' 
+        'Enabled'
       }
       2 
       {
-        'Disabled' 
+        'Disabled'
       }
       3 
       {
-        'Absent' 
+        'Absent'
       }
       4 
       {
-        'Unknown' 
+        'Unknown'
       }
     }
 
@@ -5331,7 +5412,7 @@ function Get-ApplicationInformationFromRegistry($RegistryProvider)
 
   $RegItemCollection.sNames |
   Where-Object -FilterScript {
-    (($_.Length -ne 38) -or (($_.Length -eq 38) -and (-not $_.StartsWith('{')))) 
+    (($_.Length -ne 38) -or (($_.Length -eq 38) -and (-not $_.StartsWith('{'))))
   } |
   ForEach-Object -Process {
     $IncludeProgram = $true
@@ -5462,7 +5543,7 @@ function Get-PatchInformationFromRegistry($RegistryProvider)
 
   $RegItemCollection.sNames |
   Where-Object -FilterScript {
-    ($_ -imatch '^(KB)?\d+$') 
+    ($_ -imatch '^(KB)?\d+$')
   } |
   ForEach-Object -Process {
     $Patch = New-Object -TypeName psobject -Property @{
@@ -5531,10 +5612,10 @@ function Get-LocalSecurityPolicyInformation
     $NTAccount = $null
 
     Invoke-Command -ScriptBlock {
-      &psexec \\$Computer cmd "/C `"secedit /export /cfg %TMP%\rights.inf /quiet && type %TMP%\rights.inf && del %TMP%\rights.inf`"" 
+      &psexec \\$Computer cmd "/C `"secedit /export /cfg %TMP%\rights.inf /quiet && type %TMP%\rights.inf && del %TMP%\rights.inf`""
     } | 
     Where-Object -FilterScript {
-      $_ -ilike 'se* = *' 
+      $_ -ilike 'se* = *'
     } | 
     ForEach-Object -Process {
       $RightsAssignment = $_.Split('=')
@@ -5711,7 +5792,8 @@ function Get-IISInformation([string]$Computer, [System.Version]$OSVersion, [Vali
   if ($OSVersion.CompareTo($WindowsVista) -ge 0) 
   {
     Get-IIS7WebInformation -Computer $Computer -Type $Type
-  } else 
+  }
+  else 
   {
     Get-IIS6WebInformation -Computer $Computer -Type $Type
   }
@@ -5795,7 +5877,7 @@ function Get-WindowsMachineInformation
     [alias('data')]
     [ValidateSet('AdditionalHardware','All','BIOS','DesktopSessions','EventLog','FullyQualifiedDomainName','InstalledApplications','InstalledPatches','IPRoutes', `
         'LastLoggedOnUser','LocalGroups','LocalUserAccounts','None','PowerPlans','Printers','PrintSpoolerLocation','Processes', `
-    'ProductKeys','RegistrySize','Services','Shares','StartupCommands','WindowsComponents')]
+    'ProductKeys','RegistrySize','Services','ScheduledTask','Shares','StartupCommands','WindowsComponents')]
     [string[]]
     $AdditionalData = @('None')
     ,
@@ -5858,6 +5940,7 @@ function Get-WindowsMachineInformation
         }
         RunningProcesses = @()
         Services         = @()
+        ScheduledTask    = @()
         Shares           = @()
         Users            = New-Object -TypeName psobject -Property @{
           LocalGroups     = @()
@@ -5880,7 +5963,7 @@ function Get-WindowsMachineInformation
     {
       $AdditionalData = @('AdditionalHardware', 'BIOS', 'DesktopSessions', 'EventLog', 'FullyQualifiedDomainName', 'InstalledApplications', 'InstalledPatches', 'IPRoutes', `
         'LastLoggedOnUser', 'LocalGroups', 'LocalUserAccounts', 'PowerPlans', 'Printers', 'PrintSpoolerLocation', 'Processes', `
-      'ProductKeys', 'RegistrySize', 'Services', 'Shares', 'StartupCommands', 'WindowsComponents')
+      'ProductKeys', 'RegistrySize', 'Services', 'ScheduledTask', 'Shares', 'StartupCommands', 'WindowsComponents')
     }
 
     try 
@@ -5904,7 +5987,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering computer system information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           }
         }
       }
@@ -5923,7 +6006,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering computer system product information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -5942,7 +6025,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering OS information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         }
       }
       #endregion
@@ -5960,7 +6043,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering time zone: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         }
       }
       #endregion
@@ -5978,7 +6061,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering pagefile information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         }
       }
       #endregion
@@ -5996,7 +6079,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering network adapter configuration: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6014,7 +6097,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about physical memory: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6032,7 +6115,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering processor information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6050,7 +6133,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering system enclosure information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6068,7 +6151,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering CD-ROM Information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6086,7 +6169,7 @@ function Get-WindowsMachineInformation
         Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering disk information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
         if (++$ErrorCount -ge $StopAtErrorCount) 
         {
-          throw 
+          throw
         } 
       }
       #endregion
@@ -6117,7 +6200,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering BIOS information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6138,7 +6221,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering local groups and group members: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6159,7 +6242,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering local users: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6172,7 +6255,7 @@ function Get-WindowsMachineInformation
         try 
         {
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about logged on users" -MessageLevel Verbose
-          $MachineInformation.OperatingSystem.Users.DesktopSessions = Get-DesktopSessionInformation -Computer $ComputerName  -Type $Type
+          $MachineInformation.OperatingSystem.Users.DesktopSessions = Get-DesktopSessionInformation -Computer $ComputerName -Type $Type
         }
         catch 
         {
@@ -6180,7 +6263,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about logged on users: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       } 
@@ -6208,7 +6291,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering IPv4 Route information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6229,7 +6312,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering event log settings: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6254,7 +6337,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about power plans: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6275,7 +6358,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering printer information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6296,7 +6379,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering process information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6317,7 +6400,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering registry size information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           }
         }
       }
@@ -6338,7 +6421,28 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about services: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
+          } 
+        }
+      }
+      #endregion
+
+      # Get-ScheduledTaskInformation
+      #region
+      if ($AdditionalData -icontains 'ScheduledTask') 
+      { 
+        try 
+        { 
+          Write-WindowsMachineInformationLog -Message "[$ComputerName] Gathering information about services" -MessageLevel Verbose
+          $MachineInformation.OperatingSystem.ScheduledTask = Get-ScheduledTaskInformation -Computer $ComputerName
+        }
+        catch 
+        {
+          $ErrorRecord = $_.Exception.ErrorRecord
+          Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about Scheduled Tasks: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
+          if (++$ErrorCount -ge $StopAtErrorCount) 
+          {
+            throw
           } 
         }
       }
@@ -6359,7 +6463,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about shares: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6380,7 +6484,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering Sound Device information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
         #endregion
@@ -6398,7 +6502,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering TapeDrive information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
         #endregion
@@ -6416,7 +6520,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering Video Controller information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
         #endregion
@@ -6437,7 +6541,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering Startup Commands information: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6453,7 +6557,119 @@ function Get-WindowsMachineInformation
       Switch ($Type){
         CIM 
         {
-          $StdRegProv = 'StdRegProv'
+          $GetStringValue = {
+            [cmdletbinding()]
+            param(
+              [Parameter(
+              Mandatory = $true)]
+              [int64]
+              $hDefKey,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sSubKeyName,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sValueName,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sValue
+            )
+            process{
+
+              $paramHash = @{
+                cimclass     = Get-CimClass -Namespace root\default -ClassName StdRegProv -ComputerName ($this).cimsystemproperties.ServerName
+                ComputerName = ($this).cimsystemproperties.ServerName
+                Name         = 'GetStringValue'
+                Arguments    = $PSBoundParameters
+              }
+              Invoke-CimMethod @paramHash   
+            }
+          }
+          $GetDWORDValue = {
+            [cmdletbinding()]
+            param(
+              [Parameter(
+              Mandatory = $true)]
+              [int64]
+              $hDefKey,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sSubKeyName,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sValueName,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sValue
+            )
+            process{
+
+              $paramHash = @{
+                cimclass     = Get-CimClass -Namespace root\default -ClassName StdRegProv -ComputerName ($this).cimsystemproperties.ServerName
+                ComputerName = ($this).cimsystemproperties.ServerName
+                Name         = 'GetDWORDValue'
+                Arguments    = $PSBoundParameters
+              }
+              Invoke-CimMethod @paramHash  
+            }
+          }
+          $EnumKey = {
+            [cmdletbinding()]
+            param(
+              [Parameter(
+              Mandatory = $true)]
+              [int64]
+              $hDefKey,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sSubKeyName
+            )
+            process{
+
+              $paramHash = @{
+                cimclass     = Get-CimClass -Namespace root\default -ClassName StdRegProv -ComputerName ($this).cimsystemproperties.ServerName
+                ComputerName = ($this).cimsystemproperties.ServerName
+                Name         = 'EnumKey'
+                Arguments    = $PSBoundParameters
+              }
+              Invoke-CimMethod @paramHash    
+            }
+          }
+          $EnumValues = {
+            [cmdletbinding()]
+            param(
+              [Parameter(
+              Mandatory = $true)]
+              [int64]
+              $hDefKey,
+              [Parameter(
+              Mandatory = $true)]
+              [string]
+              $sSubKeyName
+            )
+            process{
+
+              $paramHash = @{
+                cimclass     = Get-CimClass -Namespace root\default -ClassName StdRegProv -ComputerName ($this).cimsystemproperties.ServerName
+                ComputerName = ($this).cimsystemproperties.ServerName
+                Name         = 'EnumValues'
+                Arguments    = $PSBoundParameters
+              }
+              Invoke-CimMethod @paramHash    
+            }
+          }
+          $StdRegProv = Get-CimClass -ClassName StdRegProv -ComputerName $ComputerName
+          $StdRegProv | Add-Member -MemberType ScriptMethod -Name GetStringValue -Value $GetStringValue
+          $StdRegProv | Add-Member -MemberType ScriptMethod -Name GetDWORDValue -Value $GetDWORDValue
+          $StdRegProv | Add-Member -MemberType ScriptMethod -Name EnumKey -Value $EnumKey
+          $StdRegProv | Add-Member -MemberType ScriptMethod -Name EnumValues -Value $EnumValues
         }
         WMI 
         {
@@ -6477,7 +6693,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering application information from WMI: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
 
@@ -6492,7 +6708,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering application information from registry: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
       }
@@ -6514,7 +6730,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about patches from WMI: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         }
 
@@ -6529,7 +6745,7 @@ function Get-WindowsMachineInformation
           Write-WindowsMachineInformationLog -Message "[$ComputerName] Error gathering information about patches from registry: $($ErrorRecord.Exception.Message) ($([System.IO.Path]::GetFileName($ErrorRecord.InvocationInfo.ScriptName)) line $($ErrorRecord.InvocationInfo.ScriptLineNumber), char $($ErrorRecord.InvocationInfo.OffsetInLine))" -MessageLevel Warning
           if (++$ErrorCount -ge $StopAtErrorCount) 
           {
-            throw 
+            throw
           } 
         } 
       }

@@ -882,7 +882,7 @@ function Export-WindowsInventoryToExcel
     $ColorThemePath = $null
 
     # Used to hold all of the formatting to be applied at the end
-    $WorksheetCount = 23
+    $WorksheetCount = 24
     $WorksheetFormat = @{}
 
 
@@ -2194,10 +2194,11 @@ function Export-WindowsInventoryToExcel
 
         $_.OperatingSystem.Services |
         Where-Object {
-          $_.Caption 
+          $_.TaskName 
         } |
         ForEach-Object {
           $Col = 0
+          $WorksheetData[$Row, $Col++] = $MachineName
           $WorksheetData[$Row, $Col++] = $MachineName
           $WorksheetData[$Row, $Col++] = $_.Caption
           $WorksheetData[$Row, $Col++] = $_.PathName
@@ -2621,6 +2622,61 @@ function Export-WindowsInventoryToExcel
       $WorksheetNumber++
       #endregion
 
+      #Worksheet 24: Scheduled Tasks
+$ProgressStatus = "Writing Worksheet #$($WorksheetNumber): Scheduled Tasks"
+      Write-WindowsInventoryLog -Message $ProgressStatus -MessageLevel Verbose
+      Write-Progress -Activity $ProgressActivity -PercentComplete (($WorksheetNumber / ($WorksheetCount * 2)) * 100) -Status $ProgressStatus -Id $ProgressId -ParentId $ParentProgressId
+      #region
+      $Worksheet = $Excel.Worksheets.Item($WorksheetNumber)
+      $Worksheet.Name = 'Scheduled Tasks'
+      $Worksheet.Tab.ThemeColor = $OperatingSystemTabColor
+
+      $RowCount = (($WindowsInventory.Machine | ForEach-Object {
+            $_.OperatingSystem.ScheduledTask 
+      }) | Measure-Object).Count + 1
+      $ColumnCount = 5
+      $WorksheetData = New-Object -TypeName 'string[,]' -ArgumentList $RowCount, $ColumnCount
+
+      $Col = 0
+      $WorksheetData[0, $Col++] = 'Machine Name'
+      $WorksheetData[0, $Col++] = 'TaskPath'
+      $WorksheetData[0, $Col++] = 'TaskName'
+      $WorksheetData[0, $Col++] = 'Last Run Time'
+      $WorksheetData[0, $Col++] = 'Next Run Time'
+
+      $Row = 1
+      $WindowsInventory.Machine | ForEach-Object {
+        $MachineName = $_.OperatingSystem.Settings.ComputerSystem.Name
+
+        $_.OperatingSystem.ScheduledTask |
+        Where-Object {
+          $_.TaskName 
+        } |
+        ForEach-Object {
+          $Col = 0
+          $WorksheetData[$Row, $Col++] = $MachineName
+          $WorksheetData[$Row, $Col++] = $_.TaskPath
+          $WorksheetData[$Row, $Col++] = $_.TaskName
+          $WorksheetData[$Row, $Col++] = $_.LastRunTime
+          $WorksheetData[$Row, $Col++] = $_.NextRunTime
+          $Row++
+        }
+      }
+      $Range = $Worksheet.Range($Worksheet.Cells.Item(1,1), $Worksheet.Cells.Item($RowCount,$ColumnCount))
+      $Range.Value2 = $WorksheetData
+      $null = $Range.Sort($Worksheet.Columns.Item(1), $XlSortOrder::xlAscending, $Worksheet.Columns.Item(2), $MissingType, $XlSortOrder::xlAscending, $MissingType, $MissingType, $XlYesNoGuess::xlYes)
+
+      $WorksheetFormat.Add($WorksheetNumber, @{
+          BoldFirstRow    = $true
+          BoldFirstColumn = $false
+          AutoFilter      = $true
+          FreezeAtCell    = 'C2'
+          ColumnFormat    = @()
+          RowFormat       = @()
+      })
+
+      $WorksheetNumber++
+      #endregion
 
       # Apply formatting to every worksheet
       # Work backwards so that the first sheet is active when the workbook is saved
